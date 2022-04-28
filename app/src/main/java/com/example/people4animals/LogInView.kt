@@ -3,9 +3,9 @@ package com.example.people4animals
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class SingUpView : AppCompatActivity() {
+class LogInView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sing_up_view)
+        setContentView(R.layout.activity_log_in_view)
     }
 }
