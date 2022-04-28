@@ -3,10 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Plataformas/AndroidStudioProjects/people4animals/app/src/main/res/drawable/ic_group_1.xml" value="0.196" />
-        <entry key="..\:/Users/Plataformas/AndroidStudioProjects/people4animals/app/src/main/res/drawable/ic_group_3.xml" value="0.196" />
-        <entry key="..\:/Users/Plataformas/AndroidStudioProjects/people4animals/app/src/main/res/drawable/ic_polygon_2.xml" value="0.196" />
-        <entry key="..\:/Users/Plataformas/AndroidStudioProjects/people4animals/app/src/main/res/layout/activity_main.xml" value="0.35733695652173914" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/activity_sing_up_view.xml" value="0.1693840579710145" />
       </map>
     </option>
   </component>
