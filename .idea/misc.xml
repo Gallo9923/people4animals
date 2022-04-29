@@ -3,19 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/cgp99/Documents/apps-moviles/people4animals/app/src/main/res/drawable/circle_background.xml" value="0.2265" />
-        <entry key="..\:/Users/cgp99/Documents/apps-moviles/people4animals/app/src/main/res/drawable/done_48px.xml" value="0.2265" />
-        <entry key="..\:/Users/cgp99/Documents/apps-moviles/people4animals/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
-        <entry key="..\:/Users/cgp99/Documents/apps-moviles/people4animals/app/src/main/res/layout/activity_main.xml" value="0.2006340579710145" />
-        <entry key="..\:/Users/cgp99/Documents/apps-moviles/people4animals/app/src/main/res/layout/case_fragment.xml" value="0.2" />
-        <entry key="..\:/Users/cgp99/Documents/apps-moviles/people4animals/app/src/main/res/layout/case_status_card.xml" value="0.20081595648232095" />
-        <entry key="app/src/main/res/drawable/rectangle.xml" value="0.33179487179487177" />
-        <entry key="app/src/main/res/drawable/rectangle_case.xml" value="0.33179487179487177" />
-        <entry key="app/src/main/res/drawable/rectangle_image.xml" value="0.33179487179487177" />
-        <entry key="app/src/main/res/drawable/rectangle_solid_case.xml" value="0.33179487179487177" />
-        <entry key="app/src/main/res/layout/case_fragment.xml" value="0.15602836879432624" />
-        <entry key="app/src/main/res/layout/case_item.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/case_status_card.xml" value="0.15602836879432624" />
+        <entry key="app/src/main/res/layout/case_item.xml" value="0.15602836879432624" />
       </map>
     </option>
   </component>
