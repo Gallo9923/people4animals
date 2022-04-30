@@ -134,7 +134,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:entries="kskjs,sjilkasd,asdkmklsad"
+                    android:entries="@array/cities_array"
                     app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName33"
                     app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName33"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
