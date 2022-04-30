@@ -4,46 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF3D00"
     tools:context=".LogInView">
 
     <EditText
         android:id="@+id/loginEmailET"
+        style="@style/TextIntput"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="Email"
+        android:hint="Correo"
         android:inputType="textPersonName"
+        android:shadowColor="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/loginPassET"
+        style="@style/TextIntput"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Contraseña"
         android:inputType="textPersonName"
+        android:textColorHighlight="#FFFFFFFF"
+        android:textColorHint="#FFFFFFFF"
+        android:textColorLink="#FFFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginEmailET" />
 
     <Button
-        android:id="@+id/loginSignInBtn"
-        android:layout_width="wrap_content"
+        android:id="@+id/logInBtn"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="Ingresar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassET" />
+        tools:layout_editor_absoluteY="546dp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -53,26 +62,43 @@
         app:layout_constraintBottom_toTopOf="@+id/loginEmailET"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:srcCompat="@drawable/ic_group_1" />
 
     <TextView
-        android:id="@+id/loginNoAccountTV"
+        android:id="@+id/resetPasswordLink"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_height="19dp"
         android:layout_marginBottom="32dp"
-        android:text="No tengo cuenta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/loginForgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        android:inputType="textUri"
         android:text="Olvidé mi contraseña"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/logInBtn"
+        app:layout_constraintStart_toStartOf="@+id/loginPassET"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassET" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="o"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/logInBtn"
+        app:layout_constraintStart_toStartOf="@+id/logInBtn"
+        app:layout_constraintTop_toBottomOf="@+id/logInBtn" />
+
+    <TextView
+        android:id="@+id/signUpLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Crear una cuenta nueva"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
