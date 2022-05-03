@@ -24,33 +24,31 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/rectangle_image"
             android:src="@drawable/dog"
-            app:tint="@color/app_gray">
-        </ImageView>
+            app:tint="@color/app_gray"></ImageView>
 
         <TextView
             android:id="@+id/case_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/case_image"
-            android:layout_marginTop="25dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_toRightOf="@id/case_image"
+            android:fontFamily="@font/ubuntu"
             android:text="Case title"
-            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="25dp"
-            android:textColor="@color/black">
-        </TextView>
+            android:textStyle="bold"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/case_image"
             android:layout_below="@id/case_title_tv"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="15dp"
+            android:layout_toRightOf="@id/case_image"
+            android:fontFamily="@font/ubuntu"
             android:text="Case description..."
-            android:textSize="20dp"
-            >
-        </TextView>
+            android:textSize="20dp"></TextView>
     </RelativeLayout>
 
 </RelativeLayout>
