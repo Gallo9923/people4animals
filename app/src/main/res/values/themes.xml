@@ -32,6 +32,6 @@
         <item name="android:color">@color/app_gray</item>
     </style>
 
-
+    <style name="SplashPeople4Animals" parent="Theme.AppCompat.NoActionBar"></style>
 
 </resources>

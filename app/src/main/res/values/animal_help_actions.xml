@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="animal_help_actions_array">
+        <item>Donar</item>
+        <item>Auxiliar fisicamente</item>
+        <item>Conectar</item>
+    </string-array>
+</resources>
