@@ -18,20 +18,15 @@ class LogInView : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.logInBtn.setOnClickListener(::login)
-
         binding.signUpLink.setOnClickListener(::signUp)
     }
 
     private fun signUp(view: View) {
-
         startActivity(Intent(this, SignUpActivity::class.java))
-
     }
 
     private fun login(view: View) {
-
         Log.e(">>>>>>>>>>>>>>>", binding.loginEmailET.text.toString())
         startActivity(Intent(this, MainActivity::class.java))
     }
-
 }

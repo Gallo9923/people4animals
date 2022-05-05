@@ -14,7 +14,5 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="SplashPeople4Animals" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_p4a_screen</item>
-    </style>
+    <style name="SplashPeople4Animals" parent="Theme.AppCompat.NoActionBar"></style>
 </resources>
