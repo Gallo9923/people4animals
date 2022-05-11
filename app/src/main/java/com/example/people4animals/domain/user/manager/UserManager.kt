@@ -12,7 +12,7 @@ import com.google.firebase.ktx.Firebase
 
 object UserManager {
 
-    fun signUp(context: Context,user: User, password: String): User {
+    fun signUp(context: Context, user: User, password: String): User {
         // Register user in Firebase Auth
         Firebase.auth.createUserWithEmailAndPassword(
             user.username,
@@ -24,38 +24,26 @@ object UserManager {
                 user.username,
                 user.name,
                 user.phone,
-                user.city)
+                user.city
+            )
 
-            Firebase.firestore.collection("users").document(authUser.id).set(authUser).addOnSuccessListener {
-                sendVerificationEmail(context)
-                (context as Activity).finish()
-            }
-
-        }.addOnFailureListener{
+            Firebase.firestore.collection("users").document(authUser.id).set(authUser)
+                .addOnSuccessListener {
+                    sendVerificationEmail(context)
+                    (context as Activity).finish()
+                }
+        }.addOnFailureListener {
             Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
         }
 
         return user
     }
 
-    private fun sendVerificationEmail(context: Context){
+    private fun sendVerificationEmail(context: Context) {
         Firebase.auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
             Toast.makeText(context, R.string.verify_email, Toast.LENGTH_LONG).show()
         }?.addOnFailureListener {
             Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
         }
     }
-
-    fun findUserByUsername(): User {
-        //TODO: Get this info from firestore
-        return User(
-            "",
-            "pepit@gmail.com",
-            "Pepito Perez",
-            "3218291992",
-            "Cali"
-        )
-    }
-
-
 }

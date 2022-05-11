@@ -36,15 +36,6 @@ class SessionManager private constructor(context: Context) {
         sharedPreference.currentUser = "non-user"
     }
 
-//    fun logIn(username: String, password: String): Boolean {
-//
-//        if (true) { //TODO: Validate with google auth
-//            setCurrentUser(UserManager.findUserByUsername())
-//            return true
-//        }
-//        return false
-//    }
-
     companion object :
         SingletonHolder<SessionManager, Context>(::SessionManager)
 }
