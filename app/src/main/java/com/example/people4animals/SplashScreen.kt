@@ -4,12 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
+import com.example.people4animals.application.session.SessionManager
+import com.google.gson.Gson
 
 class SplashScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
 
         object : CountDownTimer(3000, 1000) {
             override fun onTick(p0: Long) {}
@@ -21,10 +25,10 @@ class SplashScreen : AppCompatActivity() {
                 }
             }
         }.start()
+
     }
 
     private fun verifyCurrentSession(): Boolean {
-        //TODO("Current user logged - VALIDATION HERE")
-        return false
+        return SessionManager.getInstance(applicationContext).getCurrentUser() != null
     }
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.ActivityLogInViewBinding
 
 class LogInView : AppCompatActivity() {
@@ -26,7 +27,15 @@ class LogInView : AppCompatActivity() {
     }
 
     private fun login(view: View) {
-        Log.e(">>>>>>>>>>>>>>>", binding.loginEmailET.text.toString())
-        startActivity(Intent(this, MainActivity::class.java))
+        if (SessionManager.getInstance(applicationContext).logIn(
+                binding.loginEmailET.text.toString(),
+                binding.loginPassET.text.toString()
+            )
+        ) {
+            startActivity(Intent(this, MainActivity::class.java))
+
+        }else{
+            //TODO: Invalid credentials
+        }
     }
 }
