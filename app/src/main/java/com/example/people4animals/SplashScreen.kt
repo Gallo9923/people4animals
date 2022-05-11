@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import com.example.people4animals.application.session.SessionManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 
 class SplashScreen : AppCompatActivity() {
@@ -18,17 +20,18 @@ class SplashScreen : AppCompatActivity() {
         object : CountDownTimer(3000, 1000) {
             override fun onTick(p0: Long) {}
             override fun onFinish() {
-                if (verifyCurrentSession()) {
-                    startActivity(Intent(applicationContext, MainActivity::class.java))
-                } else {
+                if (needAuthentication()) {
                     startActivity(Intent(applicationContext, LogInView::class.java))
+                } else {
+                    startActivity(Intent(applicationContext, MainActivity::class.java))
                 }
             }
         }.start()
 
     }
 
-    private fun verifyCurrentSession(): Boolean {
-        return SessionManager.getInstance(applicationContext).getCurrentUser() != null
+    private fun needAuthentication(): Boolean {
+        val user = SessionManager.getInstance(applicationContext).getCurrentUser()
+        return user == null || Firebase.auth.currentUser == null || Firebase.auth.currentUser?.isEmailVerified == false
     }
 }

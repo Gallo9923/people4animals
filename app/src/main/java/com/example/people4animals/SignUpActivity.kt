@@ -8,6 +8,8 @@ import com.example.people4animals.databinding.ActivityLogInViewBinding
 import com.example.people4animals.databinding.ActivitySignUpBinding
 import com.example.people4animals.domain.user.manager.UserManager
 import com.example.people4animals.domain.user.model.User
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -19,12 +21,15 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.createAccountBtn.setOnClickListener {
+            createAccount()
+        }
 
     }
 
-
-    fun createAccount(view: View) {
-        var user = User(
+    private fun createAccount() {
+        val user = User(
+            "",
             binding.email.text.toString(),
             binding.firstName.text.toString() + " " + binding.lastName.text.toString(),
             binding.phoneNumber.text.toString(),
@@ -32,7 +37,7 @@ class SignUpActivity : AppCompatActivity() {
         )
 
         if (validateUserData(user)) {
-            UserManager.signUp(user, binding.password.text.toString())
+            UserManager.signUp(this, user, binding.password.text.toString())
         }
     }
 
