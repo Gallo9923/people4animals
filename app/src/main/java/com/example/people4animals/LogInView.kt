@@ -39,16 +39,16 @@ class LogInView : AppCompatActivity() {
         Firebase.auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
             val fbUser = Firebase.auth.currentUser
 
-            if(fbUser!!.isEmailVerified){
-                Firebase.firestore.collection("users").document(fbUser.uid).get().addOnSuccessListener {
+            //BLOCK-A if(fbUser!!.isEmailVerified){ BLOCK-A TODO: Email validation no supported yet
+                Firebase.firestore.collection("users").document(fbUser!!.uid).get().addOnSuccessListener {
                     val user = it.toObject(User::class.java)
                     SessionManager.getInstance(applicationContext).setCurrentUser(user!!)
                 }
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
-            }else{
-                Toast.makeText(this, R.string.email_not_verified, Toast.LENGTH_LONG).show()
-            }
+          //BLOCK-A   }else{
+          //BLOCK-A    Toast.makeText(this, R.string.email_not_verified, Toast.LENGTH_LONG).show()
+          //BLOCK-A  }
 
         }.addOnFailureListener{
             Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
