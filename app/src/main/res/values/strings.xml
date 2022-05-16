@@ -2,4 +2,8 @@
     <string name="app_name">People4Animals</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="verify_email">Verify your email before you log in.</string>
+    <string name="email_not_verified">Your email is not verified.</string>
+    <string name="new_report_send_report">Send report</string>
+    <string name="new_report_description">Description</string>
 </resources>

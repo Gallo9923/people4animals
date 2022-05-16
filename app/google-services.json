@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "207448802143",
+    "project_id": "people4animals-3c429",
+    "storage_bucket": "people4animals-3c429.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207448802143:android:1bea05f0c3376d0b9b2cea",
+        "android_client_info": {
+          "package_name": "com.example.people4animals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207448802143-n7u5d5p1ur2k66fr5553c771as634rbp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpd_W15sFwLyQ2ndZauEy1hUCoqp7bMJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207448802143-n7u5d5p1ur2k66fr5553c771as634rbp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -45,7 +45,7 @@
                     tools:text="Información general" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName28"
+                    android:id="@+id/firstName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
@@ -58,7 +58,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName30"
+                    android:id="@+id/lastName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -66,12 +66,12 @@
                     android:hint="Apellido"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName28"
-                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName28"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName28" />
+                    app:layout_constraintEnd_toEndOf="@+id/firstName"
+                    app:layout_constraintStart_toStartOf="@+id/firstName"
+                    app:layout_constraintTop_toBottomOf="@+id/firstName" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName31"
+                    android:id="@+id/phoneNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -79,12 +79,12 @@
                     android:hint="Telefono"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName30"
-                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName30"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName30" />
+                    app:layout_constraintEnd_toEndOf="@+id/lastName"
+                    app:layout_constraintStart_toStartOf="@+id/lastName"
+                    app:layout_constraintTop_toBottomOf="@+id/lastName" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName32"
+                    android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -92,12 +92,12 @@
                     android:hint="Correo electronico"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName31"
-                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName31"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName31" />
+                    app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
+                    app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName33"
+                    android:id="@+id/password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -105,9 +105,9 @@
                     android:hint="contraseña"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName32"
-                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName32"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName32" />
+                    app:layout_constraintEnd_toEndOf="@+id/email"
+                    app:layout_constraintStart_toStartOf="@+id/email"
+                    app:layout_constraintTop_toBottomOf="@+id/email" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -118,16 +118,16 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/textView3"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName33" />
+                    app:layout_constraintTop_toBottomOf="@+id/password" />
 
                 <Spinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/city"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
                     android:entries="@array/cities_array"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName33"
-                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName33"
+                    app:layout_constraintEnd_toEndOf="@+id/password"
+                    app:layout_constraintStart_toStartOf="@+id/password"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                 <TextView
@@ -136,9 +136,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:text="Unicación"
-                    app:layout_constraintEnd_toEndOf="@+id/spinner"
-                    app:layout_constraintStart_toStartOf="@+id/spinner"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner" />
+                    app:layout_constraintEnd_toEndOf="@+id/city"
+                    app:layout_constraintStart_toStartOf="@+id/city"
+                    app:layout_constraintTop_toBottomOf="@+id/city" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName3"
@@ -148,8 +148,8 @@
                     android:ems="10"
                     android:hint="Rango de acción"
                     android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="@+id/spinner"
-                    app:layout_constraintStart_toStartOf="@+id/spinner"
+                    app:layout_constraintEnd_toEndOf="@+id/city"
+                    app:layout_constraintStart_toStartOf="@+id/city"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                 <TextView
