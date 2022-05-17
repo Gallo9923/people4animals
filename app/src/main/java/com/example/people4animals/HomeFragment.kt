@@ -31,11 +31,15 @@ class HomeFragment : Fragment() {
         adapter.addFragment(MyCasesFragment(),"Mis Casos")
         binding.viewPager.adapter = adapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
+
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object { @JvmStatic fun newInstance() = HomeFragment() }
 
 }
