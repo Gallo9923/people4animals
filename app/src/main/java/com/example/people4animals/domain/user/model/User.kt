@@ -1,5 +1,7 @@
 package com.example.people4animals.domain.user.model
 
+import java.util.*
+
 data class User(
     val id: String = "",
     val username: String = "",
