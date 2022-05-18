@@ -36,7 +36,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_launcher_foreground">
+                    android:src="@drawable/back_icon">
 
                 </ImageView>
                 <TextView
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@id/appbarlayout_report"
-        android:src="@drawable/ic_launcher_foreground"></ImageView>
+        android:src="@drawable/dogimage"></ImageView>
     <ImageView
         android:id="@+id/addreportimageBtn"
         android:layout_below="@id/reportImage"
@@ -69,7 +69,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="30dp"
         android:layout_marginTop="15dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/addreportimage"
         >
     </ImageView>
     <TextView
@@ -89,7 +89,7 @@
         android:layout_toRightOf="@id/galeryTV"
         android:layout_below="@id/reportImage"
         android:layout_marginTop="30dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/galleryicon"
         ></ImageView>
 
     <RelativeLayout
@@ -100,14 +100,26 @@
         android:background="@drawable/shape_rectangle_oval"
         android:elevation="15dp">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_margin="30dp"
-            android:orientation="vertical"
+            android:layout_marginStart="30dp"
 
-            >
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/reporttitleTV"
@@ -121,18 +133,6 @@
 
 
             <EditText
-
-                android:id="@+id/reportlocationTV"
-                style="@style/inputreport"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/inputs_background"
-                android:hint="Ubicación"
-                android:padding="10dp" />
-
-
-            <EditText
                 android:id="@+id/reportdescriptionTV"
                 style="@style/inputreport"
                 android:layout_width="match_parent"
@@ -143,19 +143,28 @@
                 android:padding="10dp"
                 android:textAlignment="textStart"></EditText>
 
-            <androidx.appcompat.widget.AppCompatButton
-                style="@style/button"
+            <Button
+                android:id="@+id/setLocationBtn"
+                style="@style/input_report_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="Publicar"
-                android:textAlignment="center"
-                android:background="@drawable/buttons_background"
-                >
-            </androidx.appcompat.widget.AppCompatButton>
+                android:layout_margin="10dp"
+                android:fontFamily="@font/ubuntu"
+                android:text="@string/report_set_location" />
+
+            <Button
+                android:id="@+id/publishBTN"
+                style="@style/input_report_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/app_blue"
+                android:fontFamily="@font/ubuntu"
+                android:text="@string/report_publish"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
