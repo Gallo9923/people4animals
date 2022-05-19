@@ -38,10 +38,10 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     init {
         _reportList.value = ArrayList<Report>()
 
-        CoroutineScope(Dispatchers.IO ).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             Firebase.firestore.collection("reports")
                 .orderBy("date")
-                .addSnapshotListener{ // Nos contextualiza en la actividad padre
+                .addSnapshotListener { // Nos contextualiza en la actividad padre
                         result, error -> // Es necesario pasar estos dos elementos
 
                     //Elementos que hacer ante el cambio, renderiza los mensajes
@@ -62,8 +62,6 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
 
         holder.postDescription.text = "${_reportList.value!![position].description}"
         holder.postUsername.text = "Pepito Perez"
-
-
 
 
         var url = "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720__340.jpg"
@@ -100,12 +98,14 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     }
 
     fun filterByUser() {
-        for (i in postList.value!!.indices) {
-
+        var ind: Int = 0
+        while (ind < postList.value!!.indices.last) {
             if (postList.value!![0].ownerId != Firebase.auth.currentUser!!.uid) {
-                postList.value!!.removeAt(i)
-                notifyItemRemoved(i)
+                postList.value!!.removeAt(ind)
+                notifyItemRemoved(ind)
+                ind = 0
             }
+            ind++
         }
     }
 
@@ -113,10 +113,10 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
         notifyItemRangeRemoved(0, _reportList.value!!.size)
         _reportList.value!!.clear()
 
-        CoroutineScope(Dispatchers.IO ).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             Firebase.firestore.collection("reports")
                 .orderBy("date")
-                .addSnapshotListener{ // Nos contextualiza en la actividad padre
+                .addSnapshotListener { // Nos contextualiza en la actividad padre
                         result, error -> // Es necesario pasar estos dos elementos
 
                     //Elementos que hacer ante el cambio, renderiza los mensajes
