@@ -44,14 +44,15 @@
             android:id="@+id/resetPasswordLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:inputType="textUri"
             android:minHeight="48dp"
             android:text="Olvidé mi contraseña"
             android:textColor="@color/app_blue"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/loginPassET"
-            app:layout_constraintTop_toBottomOf="@+id/loginPassET" />
+            app:layout_constraintStart_toStartOf="@+id/loginPassETChild"
+            app:layout_constraintTop_toBottomOf="@+id/loginPassETChild" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/logInBtn"
@@ -100,46 +101,35 @@
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/loginEmailET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:inputType="textEmailAddress"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9"
-            android:hint="Correo electrónico">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/loginPassET"
+        <EditText
+            android:id="@+id/loginPassETChild"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword"
-            app:endIconMode="password_toggle"
             android:minHeight="48dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:layout_constraintEnd_toEndOf="@+id/loginEmailETChild"
+            app:layout_constraintStart_toStartOf="@+id/loginEmailETChild"
+            app:layout_constraintTop_toBottomOf="@+id/loginEmailETChild" />
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginEmailET">
+        <EditText
+            android:id="@+id/loginEmailETChild"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Nombre"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView9"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline

@@ -13,3 +13,4 @@ data class Report(
     var description: String = "",
     var photosIds: ArrayList<String> = ArrayList()
 )
+
