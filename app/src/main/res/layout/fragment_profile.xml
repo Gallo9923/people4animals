@@ -66,6 +66,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/text1">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -80,6 +81,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/inputName">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,6 +96,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/inputLastName">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
@@ -109,6 +112,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/inputPhoneNumber">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress" />
@@ -125,6 +129,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/inputEmail">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contraseña"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
@@ -163,6 +168,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/inputEmail">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/radioAction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                      />
