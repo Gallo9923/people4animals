@@ -20,11 +20,11 @@ import kotlin.collections.ArrayList
 
 class NewReportActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityNewReportBinding
-    private lateinit var imageUri : Uri
+    private lateinit var binding: ActivityNewReportBinding
+    private lateinit var imageUri: Uri
 
-    private var latitude : Double = 0.0
-    private var longitude : Double = 0.0
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class NewReportActivity : AppCompatActivity() {
 
         val galleryLauncher = registerForActivityResult(StartActivityForResult(), ::onGalleryResult)
 
-        binding.backreportBtn.setOnClickListener{
+        binding.backreportBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -60,32 +60,33 @@ class NewReportActivity : AppCompatActivity() {
 
     }
 
-    fun onMapResult(result: ActivityResult){
+    fun onMapResult(result: ActivityResult) {
 
-        if (result.resultCode == RESULT_CANCELED){
+        if (result.resultCode == RESULT_CANCELED) {
             Toast.makeText(this, "The location was not updated", Toast.LENGTH_SHORT).show()
-        }else if (result.resultCode == RESULT_OK){
+        } else if (result.resultCode == RESULT_OK) {
 
             val data = result.data
             val lat = data?.extras?.getString("latitude")?.toDoubleOrNull()
             val lng = data?.extras?.getString("longitude")?.toDoubleOrNull()
 
-            if (lat != null && lng != null){
+            if (lat != null && lng != null) {
                 this.latitude = lat
                 this.longitude = lng
                 Toast.makeText(this, "The location was updated", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this, "There was an error updating the location", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "There was an error updating the location", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
 
-    private fun createPost(){
+    private fun createPost() {
         Log.e(">>>", "createPost")
         val report = createReport() ?: return
 
-        if(!(this::imageUri.isInitialized)){
-            Toast.makeText(this,  R.string.report_no_image, Toast.LENGTH_SHORT).show()
+        if (!(this::imageUri.isInitialized)) {
+            Toast.makeText(this, R.string.report_no_image, Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -95,10 +96,10 @@ class NewReportActivity : AppCompatActivity() {
             .child(filename)
             .putFile(this.imageUri) // TODO: Determine if onSuccessListener is needed
 
-        report.photosURL = arrayListOf<String>(filename)
+        report.photosIds = arrayListOf<String>(filename)
         Firebase.firestore.collection("reports").document(report.id).set(report)
 
-        Toast.makeText(this,  R.string.success_report_creation, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, R.string.success_report_creation, Toast.LENGTH_SHORT).show()
 
         finish()
     }
@@ -107,51 +108,51 @@ class NewReportActivity : AppCompatActivity() {
 
         val title = binding.reporttitleTV.text.toString()
         if (title.isEmpty()) {
-            Toast.makeText(this,  R.string.report_title_empty, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.report_title_empty, Toast.LENGTH_SHORT).show()
             return null
         }
 
         val description = binding.reportdescriptionTV.text.toString()
-        if (description.isEmpty()){
-            Toast.makeText(this,  R.string.report_description_empty, Toast.LENGTH_SHORT).show()
+        if (description.isEmpty()) {
+            Toast.makeText(this, R.string.report_description_empty, Toast.LENGTH_SHORT).show()
             return null
         }
 
-        if (this.latitude.equals(0.0) && this.longitude.equals(0.0)){
-            Toast.makeText(this,  R.string.report_no_location, Toast.LENGTH_SHORT).show()
+        if (this.latitude.equals(0.0) && this.longitude.equals(0.0)) {
+            Toast.makeText(this, R.string.report_no_location, Toast.LENGTH_SHORT).show()
             return null
         }
 
         return Report(
-            UUID.randomUUID().toString(),
-            "OPEN",
-            Date().time,
-            title,
-            this.latitude,
-            this.longitude,
-            description,
-            ArrayList())
+            id = UUID.randomUUID().toString(),
+            date = Date().time,
+            title = title,
+            latitude = this.latitude,
+            longitude = this.longitude,
+            description = description,
+            photosIds = ArrayList()
+        )
     }
 
     private fun onGalleryResult(result: ActivityResult) {
-        if (result.resultCode == RESULT_OK){
+        if (result.resultCode == RESULT_OK) {
             this.imageUri = result.data?.data!!
             this.imageUri?.let {
-                val bitmap : Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, this.imageUri)
-                val aspectRatio = (bitmap.width.toFloat())/bitmap.height
+                val bitmap: Bitmap =
+                    MediaStore.Images.Media.getBitmap(this.contentResolver, this.imageUri)
+                val aspectRatio = (bitmap.width.toFloat()) / bitmap.height
                 val scaledBitmap = Bitmap.createScaledBitmap(
                     bitmap,
-                    (aspectRatio*300).toInt(),
+                    (aspectRatio * 300).toInt(),
                     300,
                     true
                 )
                 binding.reportImage.setImageBitmap(scaledBitmap)
             }
-        }else if (result.resultCode == RESULT_CANCELED){
+        } else if (result.resultCode == RESULT_CANCELED) {
             // TODO: Check if conditional needed
         }
     }
-
 
 
 }
