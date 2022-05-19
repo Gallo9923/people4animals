@@ -12,6 +12,8 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import com.example.people4animals.databinding.ActivityNewReportBinding
 import com.example.people4animals.domain.user.model.Report
+import com.example.people4animals.domain.user.model.ReportStatus
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -81,7 +83,6 @@ class NewReportActivity : AppCompatActivity() {
     }
 
     private fun createPost(){
-        Log.e(">>>", "createPost")
         val report = createReport() ?: return
 
         if(!(this::imageUri.isInitialized)){
@@ -90,15 +91,26 @@ class NewReportActivity : AppCompatActivity() {
         }
 
         val filename = UUID.randomUUID().toString()
-        Firebase.storage.getReference()
+        Firebase.storage.reference
             .child("report")
             .child(filename)
             .putFile(this.imageUri) // TODO: Determine if onSuccessListener is needed
 
-        report.photosURL = arrayListOf<String>(filename)
-        Firebase.firestore.collection("reports").document(report.id).set(report)
+        report.photosIds = arrayListOf(filename)
 
-        Toast.makeText(this,  R.string.success_report_creation, Toast.LENGTH_SHORT).show()
+        Firebase.firestore.runBatch  { batch  ->
+            val reportRef = Firebase.firestore.collection("reports").document(report.id)
+            batch.set(reportRef, report)
+
+            val userId = Firebase.auth.currentUser?.uid.toString()
+            val userReport = hashMapOf("id" to report.id)
+            val userReportRef = Firebase.firestore.collection("users").document(userId).collection("reports").document(report.id)
+            batch.set(userReportRef, userReport)
+        }.addOnSuccessListener {
+            Toast.makeText(this,  R.string.success_report_creation, Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(this,  R.string.report_error_message, Toast.LENGTH_SHORT).show()
+        }
 
         finish()
     }
@@ -124,12 +136,13 @@ class NewReportActivity : AppCompatActivity() {
 
         return Report(
             UUID.randomUUID().toString(),
-            "OPEN",
+            Firebase.auth.currentUser?.uid.toString(),
+            ReportStatus.OPEN.toString(),
             Date().time,
             title,
             this.latitude,
             this.longitude,
-            description,
+            description,    
             ArrayList())
     }
 
