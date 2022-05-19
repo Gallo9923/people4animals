@@ -1,8 +1,5 @@
 package com.example.people4animals.caseList
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
@@ -12,8 +9,6 @@ import com.bumptech.glide.Glide
 import com.example.people4animals.MainActivity
 import com.example.people4animals.R
 import com.example.people4animals.domain.user.model.Report
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class Adapter() : RecyclerView.Adapter<PostVH>() {
@@ -37,14 +32,16 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
 
     override fun onBindViewHolder(holder: PostVH, position: Int) {
 
-        holder.postDate.text = "${_reportList.value!![position].date}"
-        holder.postName.text = "user name"
+        holder.postDescription.text = "${_reportList.value!![position].description}"
+        holder.postUsername.text = "Pepito Perez"
 
-        Glide.with(holder.postName)
-            .load(_reportList.value!![position].photosURL[0])
+        Glide.with(holder.postUsername)
+            .load("https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720__340.jpg")
             .centerCrop().into(holder.postImg)
 
         holder.postTitle.text = _reportList.value!![position].title
+
+
     }
 
     override fun getItemCount(): Int {
@@ -59,5 +56,4 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     fun setPostList (postList: ArrayList<Report>){
         _reportList.value = postList
     }
-
 }

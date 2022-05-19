@@ -42,11 +42,10 @@ class MainActivity : AppCompatActivity() {
 
 
         showFragment(generalFragment)
-
         binding.bottomNavView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                2131362030 -> showFragment(homeFragment)
-                2131362172 -> showFragment(profileFragment)
+            when (it.toString()) {
+                "Home" -> showFragment(generalFragment)
+                "profile" -> showFragment(profileFragment)
             }
             true
         }

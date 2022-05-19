@@ -17,7 +17,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="952dp">
-
+<!--
                 <TextView
                     android:id="@+id/tvDescription"
                     android:layout_width="wrap_content"
@@ -170,7 +170,7 @@
                     android:layout_marginTop="30dp"
                     android:text="TextView"
                     app:layout_constraintTop_toBottomOf="@+id/textView18"
-                    tools:layout_editor_absoluteX="108dp" />
+                    tools:layout_editor_absoluteX="108dp" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
