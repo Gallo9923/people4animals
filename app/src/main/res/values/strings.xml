@@ -6,4 +6,14 @@
     <string name="email_not_verified">Your email is not verified.</string>
     <string name="new_report_send_report">Send report</string>
     <string name="new_report_description">Description</string>
+    <string name="report_error_message">There has been an error creating the post...</string>
+    <string name="success_report_creation">Report created successfully</string>
+
+    <string name="report_title_empty">The title is empty</string>
+    <string name="report_description_empty">The description is empty</string>
+    <string name="report_no_image">Please choose an image</string>
+    <string name="report_no_location">Please choose a location</string>
+    <string name="report_set_location">Set Location</string>
+    <string name="report_publish">Publish</string>
+    <string name="map_set_location">Set Location</string>
 </resources>
