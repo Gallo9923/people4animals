@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var homeFragment: HomeFragment
     private lateinit var profileFragment: ViewProfile
+    private lateinit var generalFragment: GeneralFragment
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         homeFragment = HomeFragment.newInstance()
+        generalFragment = GeneralFragment.getInstance()
+        homeFragment.mainActivity = this
+
         profileFragment = ViewProfile.newInstance()
 
         requestPermissions(arrayOf(
@@ -36,6 +40,8 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.ACCESS_COARSE_LOCATION
         ), 10)
 
+
+        showFragment(generalFragment)
 
         binding.bottomNavView.setOnNavigationItemSelectedListener {
             when (it.itemId) {

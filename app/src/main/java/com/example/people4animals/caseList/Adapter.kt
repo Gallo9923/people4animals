@@ -56,8 +56,8 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
         notifyItemInserted(_reportList.value!!.size - 1)
     }
 
-    fun setpokeList (pokeList: ArrayList<Report>){
-        _reportList.value = pokeList
+    fun setPostList (postList: ArrayList<Report>){
+        _reportList.value = postList
     }
 
 }
