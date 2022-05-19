@@ -111,7 +111,7 @@ class NewReportActivity : AppCompatActivity() {
             return null
         }
 
-        val description = binding.reportdescriptionTV.text.toString()
+        val description = binding.reportdescriptionTV.editText!!.text.toString()
         if (description.isEmpty()){
             Toast.makeText(this,  R.string.report_description_empty, Toast.LENGTH_SHORT).show()
             return null
