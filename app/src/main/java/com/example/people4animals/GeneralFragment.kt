@@ -33,7 +33,20 @@ class GeneralFragment : Fragment() {
         binding.rvPost.adapter = adapter
         binding.rvPost.layoutManager = LinearLayoutManager(context)
 
+        lifecycleScope.launch(Dispatchers.IO){
+            Firebase.firestore.collection("reports")
+                .orderBy("date").addSnapshotListener(activity as Activity){ // Nos contextualiza en la actividad padre
+                        result,error-> // Es necesario pasar estos dos elementos
 
+                    //Elementos que hacer ante el cambio, renderiza los mensajes
+                    for (doc in result!!.documents){
+                        val report = doc.toObject(Report::class.java)!!
+                        Log.e("ENTRA","___________________")
+                        adapter.addPost(report)
+                        Log.e("ENTRA",adapter.postList.value!!.toString())
+                    }
+                }
+        }
 
         return binding.root
     }
