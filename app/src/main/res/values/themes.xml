@@ -52,7 +52,7 @@
     <style name="input_report_btn" parent="Widget.AppCompat.Button">
         <item name="android:fontFamily">@font/ubuntu</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/app_gray</item>
     </style>
 

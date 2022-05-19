@@ -121,27 +121,37 @@
             android:layout_marginBottom="30dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/reporttitleTV"
-                style="@style/inputreport"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/inputs_background"
-                android:hint="Título"
-                android:padding="10dp"></EditText>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                <EditText
+                    android:id="@+id/reporttitleTV"
+                    style="@style/inputreport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Título"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-            <EditText
-                android:id="@+id/reportdescriptionTV"
-                style="@style/inputreport"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/inputs_background"
+                android:id="@+id/reportdescriptionTV"
+                android:layout_height="wrap_content"
                 android:hint="Descripción"
-                android:padding="10dp"
-                android:textAlignment="textStart"></EditText>
+                android:layout_marginTop="16dp"
+                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/inputreport"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:id="@+id/setLocationBtn"
@@ -152,18 +162,17 @@
                 android:fontFamily="@font/ubuntu"
                 android:text="@string/report_set_location" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/publishBTN"
-                style="@style/input_report_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
+                android:background="@drawable/buttons_background"
                 android:backgroundTint="@color/app_blue"
                 android:fontFamily="@font/ubuntu"
                 android:text="@string/report_publish"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
         </LinearLayout>
