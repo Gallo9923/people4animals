@@ -60,8 +60,15 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
 
     override fun onBindViewHolder(holder: PostVH, position: Int) {
 
+        val userActual = Firebase.firestore.collection("users")
+            .document(_reportList.value!![position].ownerId).get().addOnSuccessListener {
+                if (it != null) {
+                    holder.postUsername.text = it.toObject(User::class.java)!!.name
+                }
+
+            }
+
         holder.postDescription.text = "${_reportList.value!![position].description}"
-        holder.postUsername.text = "Pepito Perez"
 
 
         var url = "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720__340.jpg"
@@ -98,7 +105,32 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     }
 
     fun filterByUser() {
-        var ind: Int = 0
+
+        postList.value!!.clear()
+
+        this.notifyDataSetChanged()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            Firebase.firestore.collection("reports")
+                .orderBy("date")
+                .whereEqualTo("ownerId", Firebase.auth.currentUser!!.uid.toString())
+                .addSnapshotListener { // Nos contextualiza en la actividad padre
+                        result, error -> // Es necesario pasar estos dos elementos
+
+                    //Elementos que hacer ante el cambio, renderiza los mensajes
+
+                    result?.let {
+                        for (doc in result!!.documents) {
+                            val report = doc.toObject(Report::class.java)!!
+                            addPost(report)
+                        }
+                    }
+
+                }
+        }
+
+
+        /*ar ind: Int = 0
         while (ind < postList.value!!.indices.last) {
             if (postList.value!![0].ownerId != Firebase.auth.currentUser!!.uid) {
                 postList.value!!.removeAt(ind)
@@ -106,7 +138,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
                 ind = 0
             }
             ind++
-        }
+        }*/
     }
 
     fun withOutFilter() {
