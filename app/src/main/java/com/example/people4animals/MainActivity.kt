@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.ActivityMainBinding
 
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var homeFragment: HomeFragment
     private lateinit var profileFragment: ViewProfile
+    private lateinit var generalFragment: GeneralFragment
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,25 +31,44 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         homeFragment = HomeFragment.newInstance()
+        generalFragment = GeneralFragment.getInstance()
+        homeFragment.mainActivity = this
+
         profileFragment = ViewProfile.newInstance()
 
-        requestPermissions(arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ), 10)
+        requestPermissions(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ), 10
+        )
 
 
-        binding.bottomNavView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                2131362030 -> showFragment(homeFragment)
-                2131362172 -> showFragment(profileFragment)
-            }
-            true
+        showFragment(generalFragment)
+
+        binding.homeButtonCV.setOnClickListener {
+            showFragment(generalFragment)
         }
 
-        binding.fabHome.setOnClickListener {
+        binding.profileButtonCV.setOnClickListener {
+            showFragment(profileFragment)
+        }
+
+        binding.newPostButtonCV.setOnClickListener {
             startActivity(Intent(this, NewReportActivity::class.java))
         }
+
+        /*  binding.bottomNavView.setOnNavigationItemSelectedListener {
+              when (it.toString()) {
+                  "Home" -> showFragment(generalFragment)
+                  "profile" -> showFragment(profileFragment)
+              }
+              true
+          }
+
+          binding.fabHome.setOnClickListener {
+              startActivity(Intent(this, NewReportActivity::class.java))
+          }*/
     }
 
     fun showFragment(fragment: Fragment) {
@@ -63,18 +84,23 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         var allGranted = true
-        for(result in grantResults){
-            if(result == PackageManager.PERMISSION_DENIED){
+        for (result in grantResults) {
+            if (result == PackageManager.PERMISSION_DENIED) {
                 allGranted = false
                 break
             }
         }
 
         // TODO: Check what to do if no permissions allowed
-        if(allGranted){
+        if (allGranted) {
 
-        }else{
+        } else {
 
         }
+    }
+
+    fun logOut(){
+        SessionManager.getInstance(applicationContext).logOut()
+        startActivity(Intent(this, SplashScreen::class.java))
     }
 }
