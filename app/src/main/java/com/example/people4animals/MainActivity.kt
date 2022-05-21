@@ -1,15 +1,12 @@
 package com.example.people4animals
 
 import android.Manifest
-import android.R
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.ActivityMainBinding
@@ -46,17 +43,35 @@ class MainActivity : AppCompatActivity() {
 
         showFragment(generalFragment)
 
-        binding.homeButtonCV.setOnClickListener {
-            showFragment(generalFragment)
+        binding.bottomNavView.setOnNavigationItemSelectedListener {
+
+            when (it.itemId) {
+
+                R.id.home_menu -> {
+                    showFragment(generalFragment)
+                    true
+                }
+
+
+                R.id.profile_menu -> {
+                    showFragment(profileFragment)
+
+                    true
+                }
+                else -> {super.onOptionsItemSelected(it)}
+            }
+
         }
 
-        binding.profileButtonCV.setOnClickListener {
-            showFragment(profileFragment)
-        }
+        /* binding.profileButtonCV.setOnClickListener {
+             showFragment(profileFragment)
+         }*/
 
-        binding.newPostButtonCV.setOnClickListener {
+        binding.fabHome.setOnClickListener {
             startActivity(Intent(this, NewReportActivity::class.java))
         }
+     /*   binding.newPostButtonCV.setOnClickListener {
+        }*/
 
         /*  binding.bottomNavView.setOnNavigationItemSelectedListener {
               when (it.toString()) {
@@ -99,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun logOut(){
+    fun logOut() {
         SessionManager.getInstance(applicationContext).logOut()
         startActivity(Intent(this, SplashScreen::class.java))
     }

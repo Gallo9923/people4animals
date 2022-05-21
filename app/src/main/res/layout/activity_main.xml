@@ -42,4 +42,10 @@
         app:tint="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.people4animals.HomeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="674dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
