@@ -46,8 +46,8 @@ class HomeFragment : Fragment() {
         val adapter = VpAdapter(requireActivity().supportFragmentManager)
         adapter.addFragment(GeneralFragment(),"General")
         adapter.addFragment(MyCasesFragment(),"Mis Casos")
-        //binding.viewPager.adapter = adapter
-        //binding.tabLayout.setupWithViewPager(binding.viewPager)
+        binding.viewPager.adapter = adapter
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
 
 
     }
