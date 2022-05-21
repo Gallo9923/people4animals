@@ -33,12 +33,12 @@ class MainActivity : AppCompatActivity() {
 
         profileFragment = ViewProfile.newInstance()
 
-        requestPermissions(
+       /* requestPermissions(
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ), 10
-        )
+        )*/
 
 
         showFragment(generalFragment)
