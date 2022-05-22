@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.ActivityMainBinding
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.MaterialShapeDrawable
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,9 +32,17 @@ class MainActivity : AppCompatActivity() {
         homeFragment = HomeFragment.newInstance()
         generalFragment = GeneralFragment.getInstance()
         homeFragment.mainActivity = this
-        binding.bottomNavView.background=null
-
         profileFragment = ViewProfile.newInstance()
+
+/*
+        val bottomBarNavView =  binding.bottomNavView
+
+        val bottomNavigationViewBackground = bottomBarNavView.background as MaterialShapeDrawable
+        bottomNavigationViewBackground.shapeAppearanceModel =
+            bottomNavigationViewBackground.shapeAppearanceModel.toBuilder()
+                .setTopRightCorner(CornerFamily.ROUNDED, 30f)
+                .setTopLeftCorner(CornerFamily.ROUNDED, 30f)
+                .build()*/
 
        /* requestPermissions(
             arrayOf(
