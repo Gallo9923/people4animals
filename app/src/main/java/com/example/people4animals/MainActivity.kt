@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         homeFragment = HomeFragment.newInstance()
         generalFragment = GeneralFragment.getInstance()
         homeFragment.mainActivity = this
+        binding.bottomNavView.background=null
 
         profileFragment = ViewProfile.newInstance()
 

@@ -30,35 +30,40 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="32dp"
-            app:backgroundTint="#E64A19"
+            android:background="@drawable/navbar_bg"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
             app:fabCradleMargin="20dp"
-            app:fabCradleRoundedCornerRadius="10dp"
-            app:fabCradleVerticalOffset="10dp">
+            app:fabCradleRoundedCornerRadius="10dp">
+
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:background="@drawable/navbar_bg"
                 app:itemIconSize="40dp"
-
                 app:itemIconTint="@color/menu_item_color"
                 app:itemTextColor="@color/menu_item_color"
                 app:labelVisibilityMode="unlabeled"
-                app:menu="@menu/bottom_nav_menu" />
+                app:menu="@menu/bottom_nav_menu">
 
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/app_blue"
+
             android:contentDescription="TODO"
             android:src="@drawable/ic_baseline_add"
+            app:backgroundTint="@color/white"
+            app:borderWidth="6dp"
+            app:fabCustomSize="60dp"
             app:layout_anchor="@id/bottomappbar"
-
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
