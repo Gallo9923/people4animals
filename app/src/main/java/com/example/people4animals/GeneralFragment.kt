@@ -13,6 +13,7 @@ import com.example.people4animals.caseList.Adapter
 import com.example.people4animals.databinding.FragmentGeneralBinding
 import com.example.people4animals.databinding.FragmentHomeBinding
 import com.example.people4animals.domain.user.model.Report
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -33,8 +34,29 @@ class GeneralFragment : Fragment() {
         binding.rvPost.adapter = adapter
         binding.rvPost.layoutManager = LinearLayoutManager(context)
 
-        binding.allReports.setOnClickListener { adapter.withOutFilter() }
-        binding.myReports.setOnClickListener { adapter.filterByUser() }
+        //binding.allReports.setOnClickListener { adapter.withOutFilter() }
+        //binding.myReports.setOnClickListener { adapter.filterByUser() }
+
+
+        binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                when(tab!!.text.toString()){
+
+                    "General" -> adapter.withOutFilter()
+                    "Tus Casos" ->adapter.filterByUser()
+                }
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+
+        })
 
         return binding.root
     }
