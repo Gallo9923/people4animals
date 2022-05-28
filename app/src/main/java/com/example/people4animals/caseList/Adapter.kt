@@ -79,16 +79,24 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
         uiScope.launch {
             Firebase.storage.reference.child("report")
                 .child(_reportList.value!![position].photosIds[0]).downloadUrl.addOnSuccessListener {
-                    Glide.with(holder.postUsername)
+                    Glide.with(holder.postImg)
                         .load(it.toString())
                         .centerCrop().into(holder.postImg)
                 }
+
+            Firebase.storage.reference.child("profile")
+                .child(_reportList.value!![position].ownerId).downloadUrl.addOnSuccessListener {
+                    Glide.with(holder.profileImage)
+                        .load(it.toString())
+                        .centerCrop().into(holder.profileImage)
+                }.addOnFailureListener {
+                    Glide.with(holder.profileImage)
+                        .load(url).circleCrop()
+                        .into(holder.profileImage)
+                }
         }
 
-
         holder.postTitle.text = _reportList.value!![position].title
-
-
     }
 
     override fun getItemCount(): Int {
