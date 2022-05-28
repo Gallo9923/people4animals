@@ -1,17 +1,25 @@
 package com.example.people4animals
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.ActivityMainBinding
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
+import com.example.people4animals.utils.LocationUtils
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,39 +28,35 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private val refreshTime: Long = 100000
+
     private lateinit var homeFragment: HomeFragment
     private lateinit var profileFragment: ViewProfile
     private lateinit var generalFragment: GeneralFragment
 
+    // location services
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    lateinit var userLocation: LatLng
+
+    val locationUtils:LocationUtils = LocationUtils()
+
     @RequiresApi(Build.VERSION_CODES.M)
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        locationUtils.locationPermissions(this)
 
         homeFragment = HomeFragment.newInstance()
         generalFragment = GeneralFragment.getInstance()
         homeFragment.mainActivity = this
         profileFragment = ViewProfile.newInstance()
 
-/*
-        val bottomBarNavView =  binding.bottomNavView
-
-        val bottomNavigationViewBackground = bottomBarNavView.background as MaterialShapeDrawable
-        bottomNavigationViewBackground.shapeAppearanceModel =
-            bottomNavigationViewBackground.shapeAppearanceModel.toBuilder()
-                .setTopRightCorner(CornerFamily.ROUNDED, 30f)
-                .setTopLeftCorner(CornerFamily.ROUNDED, 30f)
-                .build()*/
-
-       /* requestPermissions(
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ), 10
-        )*/
-
-
         showFragment(generalFragment)
+
+        // instance of location services
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         binding.bottomNavView.setOnNavigationItemSelectedListener {
 
@@ -74,27 +78,19 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        /* binding.profileButtonCV.setOnClickListener {
-             showFragment(profileFragment)
-         }*/
+        // get current or last location
+
+        val locationManager = this?.getSystemService(LOCATION_SERVICE) as LocationManager
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, refreshTime, 1f, ::OnLocationGPSCheange)
 
         binding.fabHome.setOnClickListener {
             startActivity(Intent(this, NewReportActivity::class.java))
         }
-     /*   binding.newPostButtonCV.setOnClickListener {
-        }*/
+    }
 
-        /*  binding.bottomNavView.setOnNavigationItemSelectedListener {
-              when (it.toString()) {
-                  "Home" -> showFragment(generalFragment)
-                  "profile" -> showFragment(profileFragment)
-              }
-              true
-          }
-
-          binding.fabHome.setOnClickListener {
-              startActivity(Intent(this, NewReportActivity::class.java))
-          }*/
+    fun OnLocationGPSCheange(loc: Location){
+        userLocation = LatLng(loc.latitude,loc.longitude)
+        Log.e("ubicación", userLocation.toString())
     }
 
     fun showFragment(fragment: Fragment) {
