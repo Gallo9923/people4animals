@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.widget.Toast
 import com.example.people4animals.application.session.SessionManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -33,6 +34,7 @@ class SplashScreen : AppCompatActivity() {
 
     private fun needAuthentication(): Boolean {
         val user = SessionManager.getInstance(applicationContext).getCurrentUser()
-        return user == null || Firebase.auth.currentUser == null || Firebase.auth.currentUser?.isEmailVerified == false
+
+        return user == null || Firebase.auth.currentUser == null // || Firebase.auth.currentUser?.isEmailVerified == false this isn't the correct place to do this validation
     }
 }
