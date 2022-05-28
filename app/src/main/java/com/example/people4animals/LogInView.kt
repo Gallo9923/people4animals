@@ -33,23 +33,38 @@ class LogInView : AppCompatActivity() {
 
     private fun login(view: View) {
 
-        if(binding.loginEmailETChild.text.toString() != "" && binding.loginPassETChild.text.toString() != "" ){
+        if (binding.loginEmailETChild.text.toString() != "" && binding.loginPassETChild.text.toString() != "") {
             val email = binding.loginEmailETChild.text.toString()
             val password = binding.loginPassETChild.text.toString()
 
             Firebase.auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-                val fbUser = Firebase.auth.currentUser
 
-                Firebase.firestore.collection("users").document(fbUser!!.uid).get()
-                    .addOnSuccessListener {
-                        val user = it.toObject(User::class.java)
-                        SessionManager.getInstance(applicationContext).setCurrentUser(user!!)
-                    }
-                startActivity(Intent(this, MainActivity::class.java))
+                if (Firebase.auth.currentUser?.isEmailVerified == true) {
+                    val fbUser = Firebase.auth.currentUser
+
+                    Firebase.firestore.collection("users").document(fbUser!!.uid).get()
+                        .addOnSuccessListener {
+                            val user = it.toObject(User::class.java)
+                            SessionManager.getInstance(applicationContext).setCurrentUser(user!!)
+                        }
+                    startActivity(Intent(this, MainActivity::class.java))
+                } else {
+                    Firebase.auth
+                    Toast.makeText(
+                        this,
+                        "Por favor, valida tu correo electronico primero",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    SessionManager.getInstance(applicationContext).logOut()
+                }
+
                 finish()
             }.addOnFailureListener {
                 Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
             }
+
+
         }
 
     }
