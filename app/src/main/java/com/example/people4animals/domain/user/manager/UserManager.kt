@@ -2,6 +2,7 @@ package com.example.people4animals.domain.user.manager
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.example.people4animals.R
 import com.example.people4animals.domain.user.model.User
