@@ -146,6 +146,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
         _reportList.value!!.clear()
 
         CoroutineScope(Dispatchers.IO).launch {
+
             Firebase.firestore.collection("reports")
                 .orderBy("date")
                 .addSnapshotListener { // Nos contextualiza en la actividad padre
@@ -156,11 +157,17 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
                         val report = doc.toObject(Report::class.java)!!
                         addPost(report)
                     }
-
+                    Log.e("on succes", _reportList!!.value!!.size.toString())
                     if ( _reportList!!.value!!.size > 1){
-                        setPostList(myActivity.locationUtils.generateSortedList(_reportList!!.value!!,this@Adapter.myActivity))
+                        setPostList(myActivity.locationUtils.generateSortedList(_reportList!!.value!!,myActivity))
                     }
                 }
+            withContext(Dispatchers.Main){
+
+                Log.e("2222", _reportList!!.value!!.size.toString())
+            }
         }
+
+
     }
 }
