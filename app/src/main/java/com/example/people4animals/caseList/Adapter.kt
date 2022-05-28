@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.people4animals.MainActivity
 import com.example.people4animals.R
 import com.example.people4animals.application.session.SessionManager
+import com.example.people4animals.domain.user.manager.UserManager
 import com.example.people4animals.domain.user.model.Report
 import com.example.people4animals.domain.user.model.User
 import com.google.firebase.auth.ktx.auth
@@ -84,16 +85,25 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
                         .centerCrop().into(holder.postImg)
                 }
 
-            Firebase.storage.reference.child("profile")
-                .child(_reportList.value!![position].ownerId).downloadUrl.addOnSuccessListener {
-                    Glide.with(holder.profileImage)
-                        .load(it.toString())
-                        .centerCrop().into(holder.profileImage)
-                }.addOnFailureListener {
-                    Glide.with(holder.profileImage)
-                        .load(url).circleCrop()
-                        .into(holder.profileImage)
-                }
+            Firebase.firestore.collection("users").document(_reportList.value!![position].ownerId)
+                .get().addOnSuccessListener {
+
+                val user = it.toObject(User::class.java)
+
+                    if(user!!.photoID!=""){
+                        Firebase.storage.reference.child("profile")
+                            .child(user.photoID).downloadUrl.addOnSuccessListener { profileUrl ->
+                                Glide.with(holder.profileImage)
+                                    .load(profileUrl)
+                                    .circleCrop().into(holder.profileImage)
+                            }
+                    }else{
+                        Glide.with(holder.profileImage)
+                            .load(url).circleCrop()
+                            .into(holder.profileImage)
+                    }
+            }
+
         }
 
         holder.postTitle.text = _reportList.value!![position].title
