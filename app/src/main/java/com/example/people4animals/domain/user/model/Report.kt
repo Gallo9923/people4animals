@@ -11,6 +11,8 @@ data class Report(
     var latitude: Double = 0.0,
     var longitude: Double = 0.0,
     var description: String = "",
-    var photosIds: ArrayList<String> = ArrayList()
+    var photosIds: ArrayList<String> = ArrayList(),
+    var distance: Double = 0.0,
+
 )
 

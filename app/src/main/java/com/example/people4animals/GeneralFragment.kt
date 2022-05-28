@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class GeneralFragment : Fragment() {
 
     lateinit var binding: FragmentGeneralBinding
-    private val adapter = Adapter()
+    val adapter = Adapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +40,12 @@ class GeneralFragment : Fragment() {
 
         binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-
-                when(tab!!.text.toString()){
-
-                    "General" -> adapter.withOutFilter()
-                    "Tus Casos" ->adapter.filterByUser()
+                if(adapter.myActivity.userLocation != null){
+                    when(tab!!.text.toString()){
+                        "General" -> adapter.withOutFilter()
+                        "Tus Casos" ->adapter.filterByUser()
+                    }
                 }
-
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {

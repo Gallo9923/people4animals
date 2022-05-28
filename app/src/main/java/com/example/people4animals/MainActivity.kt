@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     // location services
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    lateinit var userLocation: LatLng
+    var userLocation: LatLng? = null
 
     val locationUtils:LocationUtils = LocationUtils()
 
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         homeFragment = HomeFragment.newInstance()
         generalFragment = GeneralFragment.getInstance()
+        generalFragment.adapter.myActivity = this
         homeFragment.mainActivity = this
         profileFragment = ViewProfile.newInstance()
 
@@ -79,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         // get current or last location
-
         val locationManager = this?.getSystemService(LOCATION_SERVICE) as LocationManager
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, refreshTime, 1f, ::OnLocationGPSCheange)
 

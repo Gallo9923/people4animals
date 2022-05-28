@@ -156,6 +156,10 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
                         val report = doc.toObject(Report::class.java)!!
                         addPost(report)
                     }
+
+                    if ( _reportList!!.value!!.size > 1){
+                        setPostList(myActivity.locationUtils.generateSortedList(_reportList!!.value!!,this@Adapter.myActivity))
+                    }
                 }
         }
     }
