@@ -30,14 +30,14 @@ class SignUpActivity : AppCompatActivity() {
     private fun createAccount() {
         val user = User(
             "",
-            binding.email.text.toString(),
-            binding.firstName.text.toString() + " " + binding.lastName.text.toString(),
-            binding.phoneNumber.text.toString(),
+            binding.email.editText!!.text.toString(),
+            binding.firstName.editText!!.text.toString() + " " + binding.lastName.editText!!.text.toString(),
+            binding.phoneNumber.editText!!.text.toString(),
             binding.city.selectedItem.toString()
         )
 
         if (validateUserData(user)) {
-            UserManager.signUp(this, user, binding.password.text.toString())
+            UserManager.signUp(this, user, binding.password.editText!!.text.toString())
         }
     }
 

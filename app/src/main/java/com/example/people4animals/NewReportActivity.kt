@@ -124,7 +124,7 @@ class NewReportActivity : AppCompatActivity() {
             return null
         }
 
-        val description = binding.reportdescriptionTV.text.toString()
+        val description = binding.reportdescriptionTV.editText!!.text.toString()
         if (description.isEmpty()) {
             Toast.makeText(this, R.string.report_description_empty, Toast.LENGTH_SHORT).show()
             return null
@@ -150,7 +150,7 @@ class NewReportActivity : AppCompatActivity() {
     private fun onGalleryResult(result: ActivityResult) {
         if (result.resultCode == RESULT_OK) {
             this.imageUri = result.data?.data!!
-            this.imageUri?.let {
+            this.imageUri.let {
                 val bitmap: Bitmap =
                     MediaStore.Images.Media.getBitmap(this.contentResolver, this.imageUri)
                 val aspectRatio = (bitmap.width.toFloat()) / bitmap.height

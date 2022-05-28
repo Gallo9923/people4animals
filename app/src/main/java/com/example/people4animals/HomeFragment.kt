@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.people4animals.caseList.Adapter
 import com.example.people4animals.databinding.FragmentGeneralBinding
 import com.example.people4animals.domain.user.model.Report
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.ktx.firestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,22 +36,24 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
 
-        setupTabs()
+        /*setupTabs()*/
+
+
 
 
         return binding.root
     }
-
+/*
     private fun setupTabs(){
 
         val adapter = VpAdapter(requireActivity().supportFragmentManager)
         adapter.addFragment(GeneralFragment(),"General")
         adapter.addFragment(MyCasesFragment(),"Mis Casos")
-        //binding.viewPager.adapter = adapter
-        //binding.tabLayout.setupWithViewPager(binding.viewPager)
+        binding.viewPager.adapter = adapter
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
 
 
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()
