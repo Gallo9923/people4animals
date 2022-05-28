@@ -62,9 +62,9 @@ class ViewProfile : Fragment() {
                 if (snapshot != null && !snapshot.isEmpty) {
                     snapshot.forEach {
                         val user = it.toObject(User::class.java)
-                        binding.nameUser.setText(user.username)
-                        binding.phone.setText(user.phone)
-                        //binding.lastname.setText(user.name)
+                       binding.inputName.editText!!.setText(user.username)
+                        binding.inputPhoneNumber.editText!!.setText(user.phone)
+                        binding.inputLastName.editText!!.setText(user.name)
                     }
                 }
             }
@@ -75,9 +75,9 @@ class ViewProfile : Fragment() {
             val uid = Firebase.auth.currentUser?.uid
             var user = User(
                 id = uid!!,
-                name = binding.nameUser.text.toString(),
+                name = binding.inputName.editText!!.text.toString(),
                 username = SessionManager.getInstance(requireContext()).getCurrentUser()!!.username,
-                phone = binding.phone.text.toString(),
+                phone = binding.inputPhoneNumber.editText!!.text.toString(),
                 city = binding.spinner.selectedItem.toString()
             )
             Firebase.firestore.collection("users").document(uid).set(user)

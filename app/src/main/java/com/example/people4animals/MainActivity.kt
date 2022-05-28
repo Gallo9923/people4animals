@@ -1,18 +1,17 @@
 package com.example.people4animals
 
 import android.Manifest
-import android.R
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.ActivityMainBinding
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.MaterialShapeDrawable
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,30 +32,57 @@ class MainActivity : AppCompatActivity() {
         homeFragment = HomeFragment.newInstance()
         generalFragment = GeneralFragment.getInstance()
         homeFragment.mainActivity = this
-
         profileFragment = ViewProfile.newInstance()
 
-        requestPermissions(
+/*
+        val bottomBarNavView =  binding.bottomNavView
+
+        val bottomNavigationViewBackground = bottomBarNavView.background as MaterialShapeDrawable
+        bottomNavigationViewBackground.shapeAppearanceModel =
+            bottomNavigationViewBackground.shapeAppearanceModel.toBuilder()
+                .setTopRightCorner(CornerFamily.ROUNDED, 30f)
+                .setTopLeftCorner(CornerFamily.ROUNDED, 30f)
+                .build()*/
+
+       /* requestPermissions(
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ), 10
-        )
+        )*/
 
 
         showFragment(generalFragment)
 
-        binding.homeButtonCV.setOnClickListener {
-            showFragment(generalFragment)
+        binding.bottomNavView.setOnNavigationItemSelectedListener {
+
+            when (it.itemId) {
+
+                R.id.home_menu -> {
+                    showFragment(generalFragment)
+                    true
+                }
+
+
+                R.id.profile_menu -> {
+                    showFragment(profileFragment)
+
+                    true
+                }
+                else -> {super.onOptionsItemSelected(it)}
+            }
+
         }
 
-        binding.profileButtonCV.setOnClickListener {
-            showFragment(profileFragment)
-        }
+        /* binding.profileButtonCV.setOnClickListener {
+             showFragment(profileFragment)
+         }*/
 
-        binding.newPostButtonCV.setOnClickListener {
+        binding.fabHome.setOnClickListener {
             startActivity(Intent(this, NewReportActivity::class.java))
         }
+     /*   binding.newPostButtonCV.setOnClickListener {
+        }*/
 
         /*  binding.bottomNavView.setOnNavigationItemSelectedListener {
               when (it.toString()) {
@@ -99,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun logOut(){
+    fun logOut() {
         SessionManager.getInstance(applicationContext).logOut()
         startActivity(Intent(this, SplashScreen::class.java))
     }

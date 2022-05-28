@@ -33,9 +33,9 @@ class LogInView : AppCompatActivity() {
 
     private fun login(view: View) {
 
-        if(binding.loginEmailETChild.text.toString() != "" && binding.loginPassETChild.text.toString() != "" ){
-            val email = binding.loginEmailETChild.text.toString()
-            val password = binding.loginPassETChild.text.toString()
+        if(binding.loginEmailETChild.editText!!.text.toString() != "" && binding.loginPassETChild.editText!!.text.toString() != "" ){
+            val email = binding.loginEmailETChild.editText!!.text.toString()
+            val password = binding.loginPassETChild.editText!!.text.toString()
 
             Firebase.auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
                 val fbUser = Firebase.auth.currentUser
