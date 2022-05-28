@@ -8,4 +8,5 @@ data class User(
     val name: String = "",
     val phone: String = "",
     val city: String = "",
+    var photoID:String? =  null
     )

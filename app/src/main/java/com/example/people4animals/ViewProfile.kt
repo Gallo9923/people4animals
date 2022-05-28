@@ -1,5 +1,6 @@
 package com.example.people4animals
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,18 +8,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.FragmentProfileBinding
 import com.example.people4animals.domain.user.model.User
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.util.*
 
 class ViewProfile : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    lateinit var data : Array<String>
+
+    private lateinit var galleryLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,9 +39,11 @@ class ViewProfile : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        val data = arrayOf(
+        galleryLauncher = registerForActivityResult(StartActivityForResult(), ::onGalleryResult)
+
+        data = arrayOf(
             "Bogotá",
-            "Cali",
+            "Santiago de Cali",
             "Medellín",
             "Barranquilla",
             "Pereira"
@@ -50,7 +63,41 @@ class ViewProfile : Fragment() {
             (this@ViewProfile.activity as MainActivity).logOut()
         }
 
+
+        binding.imagenUser.setOnLongClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            galleryLauncher.launch(intent)
+            true
+        }
+
+        getUpdatedUser()
+
         return binding.root
+    }
+
+    private fun onGalleryResult(result: ActivityResult){
+        if(result.resultCode == RESULT_OK){
+            val uid = Firebase.auth.currentUser?.uid
+            val uri = result.data?.data
+            binding.imagenUser.setImageURI(uri)
+
+            //upload image to firestorage
+            val filename = UUID.randomUUID().toString()
+            Firebase.storage.getReference().child("profile").child(filename).putFile(uri!!)
+            Firebase.firestore.collection("users").document(uid!!).update("photoID", filename)
+        }
+
+    }
+    private fun loadCity(selectedCity : String) : Int{
+        var selectedOption = 0
+        for(i in data.indices){
+            if(data[i] == selectedCity){
+                selectedOption = i
+                break
+            }
+        }
+        return selectedOption
     }
 
     private fun loadInformation() {
@@ -64,11 +111,14 @@ class ViewProfile : Fragment() {
                         val user = it.toObject(User::class.java)
                         binding.nameUser.setText(user.username)
                         binding.phone.setText(user.phone)
-                        //binding.lastname.setText(user.name)
+                        binding.email.setText(user.username)
+                        binding.spinner.setSelection(loadCity(user.city))
                     }
                 }
             }
     }
+
+
 
     private fun updateUser() {
         binding.btnUpdateProfile.setOnClickListener {
@@ -84,6 +134,24 @@ class ViewProfile : Fragment() {
         }
     }
 
+    fun getUpdatedUser(){
+        val uid = Firebase.auth.currentUser?.uid
+        Firebase.firestore.collection("users").document(uid!!).get().addOnSuccessListener {
+            val updatedUser = it.toObject(User::class.java)
+            val photoID = updatedUser?.photoID
+            downloadImage(photoID)
+        }
+    }
+
+    fun downloadImage(photoID:String?){
+
+        if(photoID==null) return
+
+        Firebase.storage.getReference().child("profile").child(photoID!!).downloadUrl.addOnSuccessListener {
+            //Log.e(">>>",it.toString())
+            Glide.with(binding.imagenUser).load(it).into(binding.imagenUser)
+        }
+    }
 
     companion object {
         @JvmStatic

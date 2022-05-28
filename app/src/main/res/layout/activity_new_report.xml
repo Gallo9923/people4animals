@@ -150,6 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/ubuntu"
+                android:background="@drawable/inputs_background"
+                android:textAllCaps="false"
                 android:text="@string/report_set_location" />
 
             <Button
@@ -159,11 +161,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:backgroundTint="@color/app_blue"
-                android:fontFamily="@font/ubuntu"
+                android:background="@drawable/buttons_background"
                 android:text="@string/report_publish"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"
                 android:textStyle="bold" />
 
         </LinearLayout>
