@@ -107,6 +107,12 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
         }
 
         holder.postTitle.text = _reportList.value!![position].title
+
+        holder.itemView.setOnClickListener{
+            Log.e(">>>", "Clicked! $position")
+            this.listenerReportItem.onReportItemClick(position)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -177,4 +183,19 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
                 }
         }
     }
+
+    interface OnReportItemClickListenerInterface{
+        fun onReportItemClick(pos: Int)
+    }
+
+    private lateinit var listenerReportItem: OnReportItemClickListenerInterface
+
+    fun onReportItemClickListener(inter: OnReportItemClickListenerInterface){
+        listenerReportItem = inter
+    }
+
+    fun getReport(pos: Int): Report{
+        return this._reportList.value!![pos]
+    }
+
 }

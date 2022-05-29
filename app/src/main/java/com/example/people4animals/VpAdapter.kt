@@ -29,4 +29,5 @@ class VpAdapter(supportFragmentManager: FragmentManager) : FragmentPagerAdapter(
         fragmentList.add(fragment)
         fragmentTitleList.add(title)
     }
+
 }
