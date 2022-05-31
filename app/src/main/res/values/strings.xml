@@ -16,4 +16,7 @@
     <string name="report_set_location">Set Location</string>
     <string name="report_publish">Publish</string>
     <string name="map_set_location">Set Location</string>
+    <string name="update_section_title">Actualizaciones</string>
+    <string name="update_hint">Cuentanos que sabes acerca del caso</string>
+    <string name="update_title">Caso</string>
 </resources>

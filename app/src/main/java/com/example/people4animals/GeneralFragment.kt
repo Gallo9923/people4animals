@@ -1,6 +1,7 @@
 package com.example.people4animals
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,9 +18,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 
 class GeneralFragment : Fragment() {
 
@@ -37,6 +38,14 @@ class GeneralFragment : Fragment() {
         //binding.allReports.setOnClickListener { adapter.withOutFilter() }
         //binding.myReports.setOnClickListener { adapter.filterByUser() }
 
+        adapter.onReportItemClickListener(object:Adapter.OnReportItemClickListenerInterface{
+            override fun onReportItemClick(pos: Int) {
+                val intent = Intent(context, ReportUpdateActivity::class.java).apply{
+                    putExtra("report", Gson().toJson(adapter.getReport(pos)))
+                }
+                startActivity(intent)
+            }
+        })
 
         binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -60,6 +69,8 @@ class GeneralFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     companion object {
         fun getInstance() = GeneralFragment()
