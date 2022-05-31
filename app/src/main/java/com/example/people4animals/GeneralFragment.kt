@@ -34,6 +34,11 @@ class GeneralFragment : Fragment() {
         binding.rvPost.adapter = adapter
         binding.rvPost.layoutManager = LinearLayoutManager(context)
 
+        binding.swipeRvPost.setOnRefreshListener {
+
+            binding.swipeRvPost.isRefreshing = false
+        }
+
         //binding.allReports.setOnClickListener { adapter.withOutFilter() }
         //binding.myReports.setOnClickListener { adapter.filterByUser() }
 
