@@ -1,14 +1,17 @@
 package com.example.people4animals
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.people4animals.databinding.ActivityNewReportBinding
 import com.example.people4animals.databinding.ActivityNewReportUpdateBinding
 import com.example.people4animals.domain.user.model.Report
+import com.example.people4animals.domain.user.model.ReportUpdate
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,22 +19,32 @@ import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import java.util.*
 
+
 class NewReportUpdateActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewReportUpdateBinding
 
     private lateinit var report: Report
 
-    private lateinit var galleryLauncher : ActivityResultLauncher<Intent>
+    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
+
+    private val uid = Firebase.auth.currentUser?.uid
+
+    private lateinit var uri: Uri
+
+    private val updateID = UUID.randomUUID().toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewReportUpdateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        report =  Gson().fromJson((intent.extras?.get("report").toString()), Report::class.java)
+        report = Gson().fromJson((intent.extras?.get("report").toString()), Report::class.java)
 
-        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onGalleryResult)
+        galleryLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+            ::onGalleryResult
+        )
 
         binding.imageButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -39,21 +52,39 @@ class NewReportUpdateActivity : AppCompatActivity() {
             galleryLauncher.launch(intent)
             true
         }
-
+        binding.sendReportBtn.setOnClickListener(::sendReport)
     }
 
-    private fun onGalleryResult(result: ActivityResult){
-        if(result.resultCode == RESULT_OK){
-            val uid = Firebase.auth.currentUser?.uid
-            val uri = result.data?.data
+    private fun onGalleryResult(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK) {
+            uri = result.data?.data!!
             binding.photoTaken.setImageURI(uri)
-
-            //upload image to firestorage
-            val filename = UUID.randomUUID().toString()
-            Firebase.storage.getReference().child("reportUpdate").child(filename).putFile(uri!!)
-            // TODO: Set ReportUpdate to report
-            //Firebase.firestore.collection("users").document(uid!!).update("photoID", filename)
         }
+    }
 
+    private fun sendReport(view: View?) {
+        uri.let {
+            val reportUpdate = ReportUpdate(
+                uid!!,
+                binding.reportDescription.text.toString(),
+                Date().time,
+                updateID,
+                updateID
+            )
+
+            Firebase.storage.reference.child("reportUpdate").child(updateID).putFile(uri!!)
+            Firebase.firestore.collection("reports").document(report.id).collection("updates")
+                .document(updateID).set(reportUpdate)
+
+            Toast.makeText(this, "Actualización creada", Toast.LENGTH_SHORT).show()
+
+            Intent(this, ReportUpdateActivity::class.java).apply {
+                putExtra("report", Gson().toJson(report).toString())
+                startActivity(this)
+            }
+
+            finish()
+        }
+        Toast.makeText(this, "Seleccione una imagen", Toast.LENGTH_SHORT).show()
     }
 }

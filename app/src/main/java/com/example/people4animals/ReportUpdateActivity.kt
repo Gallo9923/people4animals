@@ -6,6 +6,7 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.people4animals.databinding.ActivityMapBinding
 import com.example.people4animals.databinding.ActivityReportUpdateBinding
@@ -29,15 +30,22 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 
-    private lateinit var manager : LocationManager
+    private lateinit var manager: LocationManager
+
+    private lateinit var updatesAdapter: UpdatesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReportUpdateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        report =  Gson().fromJson((intent.extras?.get("report").toString()), Report::class.java)
+        report = Gson().fromJson((intent.extras?.get("report").toString()), Report::class.java)
 
+        updatesAdapter = UpdatesAdapter(report.id)
+
+        binding.caseStatusRecyclerView.adapter = updatesAdapter
+
+        binding.caseStatusRecyclerView.layoutManager = LinearLayoutManager(this)
 
         manager = getSystemService(LOCATION_SERVICE) as LocationManager
 
@@ -47,7 +55,7 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
 
-        if(!report.photosIds.isEmpty()){
+        if (!report.photosIds.isEmpty()) {
             downloadImage(report.photosIds[0])
         }
 
@@ -58,7 +66,16 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
                 putExtra("report", Gson().toJson(report))
             }
             startActivity(intent)
+            finish()
         }
+
+        loadUpdates()
+
+    }
+
+    private fun loadUpdates() {
+
+        //Poblamos el rv  caseStatusRecyclerView
 
     }
 
@@ -77,9 +94,9 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     @SuppressLint("MissingPermission")
-    fun setInitialPos(){
+    fun setInitialPos() {
         val pos = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        if (pos != null){
+        if (pos != null) {
             moveToMarker(pos.latitude, pos.longitude)
         }
     }
@@ -95,13 +112,14 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
         )
     }
 
-    fun downloadImage(photoID: String){
+    fun downloadImage(photoID: String) {
 
-        if(photoID=="") return
+        if (photoID == "") return
 
-        Firebase.storage.getReference().child("report").child(photoID!!).downloadUrl.addOnSuccessListener {
-            //Log.e(">>>",it.toString())
-            Glide.with(binding.imageView4).load(it).into(binding.imageView4)
-        }
+        Firebase.storage.getReference().child("report")
+            .child(photoID!!).downloadUrl.addOnSuccessListener {
+                //Log.e(">>>",it.toString())
+                Glide.with(binding.imageView4).load(it).into(binding.imageView4)
+            }
     }
 }
