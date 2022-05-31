@@ -22,6 +22,6 @@ class UpdateVH(root: View) : RecyclerView.ViewHolder(root) {
         username.text = authorName
         description.text = update.content
 
-        Glide.with(updateImage).load(url).centerCrop().into(updateImage)
+        Glide.with(updateImage).load(url).into(updateImage)
     }
 }
