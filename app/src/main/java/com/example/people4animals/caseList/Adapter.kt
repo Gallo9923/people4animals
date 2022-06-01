@@ -39,7 +39,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     init {
         _reportList.value = ArrayList<Report>()
 
-        CoroutineScope(Dispatchers.IO).launch {
+        /* CoroutineScope(Dispatchers.IO).launch {
             Firebase.firestore.collection("reports")
                 .orderBy("date")
                 .addSnapshotListener { // Nos contextualiza en la actividad padre
@@ -51,7 +51,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
                         addPost(report)
                     }
                 }
-        }
+        }*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostVH {
@@ -63,7 +63,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
 
         val userActual = Firebase.firestore.collection("users")
             .document(_reportList.value!![position].ownerId).get().addOnSuccessListener {
-                Log.e("-->", it.toString())
+                //Log.e("-->", it.toString())
                 if (it != null) {
                     holder.postUsername.text = it.toObject(User::class.java)!!.name
                 }
@@ -176,11 +176,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
 
 
             withContext(Dispatchers.Main) {
-
-
             }
         }
-
-
     }
 }

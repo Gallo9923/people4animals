@@ -24,31 +24,21 @@ class LocationUtils {
                 val c2 = abs(report.longitude - mainActivity.userLocation!!.longitude)
                 var dis =  sqrt((c1).toDouble().pow(2)+(c2).toDouble().pow(2))
             report.distance = dis
-            sortedReports = orderAddReport(sortedReports, report)
         }
 
         sortedReports.forEach {
-            Log.e("Lista Resultado = ", it.distance.toString())
+            Log.e("Sin ordenar", it.distance.toString())
+        }
+
+        sortedReports.sortWith(Comparator { report1, report2 ->
+            (report1.distance - report2.distance).toInt()
+        } )
+
+        sortedReports.forEach {
+            Log.e("Ordenado", it.distance.toString())
         }
         return sortedReports
     }
-
-    private fun orderAddReport(reports:ArrayList<Report>, report: Report): ArrayList<Report> {
-        if(reports.size == 0){
-            reports.add(report)
-        } else {
-            var i = 0
-            while (reports[i].distance < report.distance){
-                i++
-            }
-            //Log.e("pos = ", i.toString())
-            reports.add(i,report)
-        }
-        //Log.e("Lista = ", reports.toString())
-
-        return reports
-    }
-
 
     fun locationPermissions(activity: MainActivity){
         val permissionCheck1 = ContextCompat.checkSelfPermission(

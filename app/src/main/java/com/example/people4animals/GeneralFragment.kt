@@ -1,24 +1,14 @@
 package com.example.people4animals
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.people4animals.caseList.Adapter
 import com.example.people4animals.databinding.FragmentGeneralBinding
-import com.example.people4animals.databinding.FragmentHomeBinding
-import com.example.people4animals.domain.user.model.Report
 import com.google.android.material.tabs.TabLayout
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class GeneralFragment : Fragment() {
@@ -47,7 +37,8 @@ class GeneralFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if(adapter.myActivity.userLocation != null){
                     when(tab!!.text.toString()){
-                        "General" -> adapter.withOutFilter()
+                        // "General" -> adapter.withOutFilter()
+                        "General" -> (activity as MainActivity).getReportsList(adapter)
                         "Tus Casos" ->adapter.filterByUser()
                     }
                 }
@@ -67,5 +58,12 @@ class GeneralFragment : Fragment() {
 
     companion object {
         fun getInstance() = GeneralFragment()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        binding.rvPost.recycledViewPool.clear()
+        adapter.notifyDataSetChanged()
     }
 }
