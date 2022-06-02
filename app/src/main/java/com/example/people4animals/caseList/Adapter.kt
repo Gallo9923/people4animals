@@ -109,7 +109,6 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     fun filterByUser() {
 
         postList.value!!.clear()
-
         this.notifyDataSetChanged()
 
         CoroutineScope(Dispatchers.IO).launch {

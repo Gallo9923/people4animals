@@ -26,6 +26,7 @@ class GeneralFragment : Fragment() {
 
         binding.swipeRvPost.setOnRefreshListener {
 
+            (activity as MainActivity).getReportsList(adapter)
             binding.swipeRvPost.isRefreshing = false
         }
 
@@ -37,9 +38,8 @@ class GeneralFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if(adapter.myActivity.userLocation != null){
                     when(tab!!.text.toString()){
-                        // "General" -> adapter.withOutFilter()
                         "General" -> (activity as MainActivity).getReportsList(adapter)
-                        "Tus Casos" ->adapter.filterByUser()
+                        "Tus Casos" ->(activity as MainActivity).getUserReports(adapter)
                     }
                 }
             }
