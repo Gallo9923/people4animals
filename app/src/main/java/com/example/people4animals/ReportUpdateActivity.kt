@@ -91,8 +91,8 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun closeCase(view: View?) {
 
-        MaterialAlertDialogBuilder(this)
-            .setMessage("Deseas cerrar el caso")
+        MaterialAlertDialogBuilder(this).setTitle("Confirmación")
+            .setMessage("¿Deseas cerrar el caso?")
             .setPositiveButton("Si") { dialog, which ->
 
                 Firebase.firestore.collection("reports").document(report.id)
