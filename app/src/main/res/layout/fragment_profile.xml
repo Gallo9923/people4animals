@@ -96,10 +96,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/inputs_background"
+                android:clickable="false"
                 android:ems="10"
                 android:hint="Correo Electrónico"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:enabled="false"
+
+                android:padding="10dp"
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/textView2"

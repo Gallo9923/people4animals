@@ -20,6 +20,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.storage.ktx.storage
 import java.util.*
 import android.app.Activity.RESULT_OK
+import android.util.Log
+import android.widget.Toast
 
 class ViewProfile : Fragment() {
 
@@ -83,8 +85,14 @@ class ViewProfile : Fragment() {
 
             //upload image to firestorage
             val filename = UUID.randomUUID().toString()
-            Firebase.storage.getReference().child("profile").child(filename).putFile(uri!!)
-            Firebase.firestore.collection("users").document(uid!!).update("photoID", filename)
+            Firebase.storage.getReference().child("profile").child(filename).putFile(uri!!).addOnCompleteListener{
+
+                Firebase.firestore.collection("users").document(uid!!).update("photoID", filename).addOnCompleteListener{
+
+                    Toast.makeText(context, "Foto de perfil actualizada correctamente", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
 
     }
