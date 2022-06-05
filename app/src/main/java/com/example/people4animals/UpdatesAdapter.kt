@@ -41,14 +41,14 @@ class UpdatesAdapter(reportID: String) : RecyclerView.Adapter<UpdateVH>() {
                 .orderBy("date")
                 .addSnapshotListener { // Nos contextualiza en la actividad padre
                         result, error -> // Es necesario pasar estos dos elementos
+                    _reportUpdatesList.value!!.clear()
 
                     //Elementos que hacer ante el cambio, renderiza los mensajes
                     for (doc in result!!.documents) {
                         val reportUpdate = doc.toObject(ReportUpdate::class.java)!!
 
                         _reportUpdatesList.value!!.add(reportUpdate)
-                        notifyItemInserted(_reportUpdatesList.value!!.size - 1)
-
+                        notifyDataSetChanged()
                     }
                 }
         }
