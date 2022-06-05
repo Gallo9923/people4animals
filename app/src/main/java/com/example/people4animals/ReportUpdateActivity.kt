@@ -146,7 +146,7 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(
             MarkerOptions()
                 .position(pos)
-                .title("Animalito")
+                .title("Tú")
         )
     }
 
