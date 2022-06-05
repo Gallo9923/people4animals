@@ -24,6 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +53,6 @@
             </androidx.cardview.widget.CardView>
 
 
-
             <TextView
                 android:id="@+id/text1"
                 android:layout_width="wrap_content"
@@ -69,38 +69,37 @@
                 android:id="@+id/nameUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/inputs_background"
                 android:ems="10"
                 android:hint="Nombre"
                 android:inputType="textPersonName"
-                android:background="@drawable/inputs_background"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/inputs_background"
                 android:ems="10"
                 android:hint="Telefono"
                 android:inputType="numberDecimal"
-                android:background="@drawable/inputs_background"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:padding="10dp" />
 
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/inputs_background"
                 android:ems="10"
                 android:hint="Correo Electrónico"
-                android:background="@drawable/inputs_background"
-                android:layout_margin="10dp"
-                android:padding="10dp"
                 android:minHeight="48dp"
-                />
+                android:padding="10dp" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -110,8 +109,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/ubuntu_medium"
                 android:text="Área de acción"
-                android:textSize="18sp"
-                />
+                android:textSize="18sp" />
 
 
             <Spinner
@@ -129,13 +127,12 @@
                 android:id="@+id/btnUpdateProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/buttons_background"
-                android:text="Actualizar"
-                android:layout_margin="10dp"
                 android:padding="10dp"
+                android:text="Actualizar"
                 android:textColor="#FFFFFF" />
-
 
 
         </LinearLayout>
