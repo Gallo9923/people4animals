@@ -17,6 +17,8 @@
     <string name="report_publish">Publish</string>
     <string name="map_set_location">Set Location</string>
     <string name="update_section_title">Actualizaciones</string>
+    <string name="report_status_closed">Estado del caso: CERRADO</string>
+    <string name="report_status_open">Estado del caso: ABIERTO</string>
     <string name="update_hint">Cuentanos que sabes acerca del caso</string>
     <string name="update_title">Caso</string>
 </resources>

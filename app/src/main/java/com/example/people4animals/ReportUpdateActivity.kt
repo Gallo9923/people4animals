@@ -6,11 +6,15 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.ActivityMapBinding
 import com.example.people4animals.databinding.ActivityReportUpdateBinding
 import com.example.people4animals.domain.user.model.Report
+import com.example.people4animals.domain.user.model.ReportStatus
 import com.example.people4animals.domain.user.model.User
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,6 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
@@ -69,14 +74,37 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
             finish()
         }
 
-        loadUpdates()
+        SessionManager.getInstance(applicationContext).getCurrentUser().let {
+            if (it?.id == report.ownerId) {
+                binding.doneBtn.visibility = View.VISIBLE
+                val status = report.status == ReportStatus.OPEN.toString()
 
+                binding.doneBtn.isEnabled = status
+                binding.doneBtn.isClickable = status
+
+                binding.statusTV.text =
+                    if (status) getString(R.string.report_status_open) else getString(R.string.report_status_closed)
+            }
+        }
+        binding.doneBtn.setOnClickListener(::closeCase)
     }
 
-    private fun loadUpdates() {
-
-        //Poblamos el rv  caseStatusRecyclerView
-
+    private fun closeCase(view: View?) {
+        Firebase.firestore.collection("reports").document(report.id)
+            .update("status", ReportStatus.CLOSED).addOnSuccessListener {
+                Toast.makeText(
+                    this,
+                    "Caso cerrado",
+                    Toast.LENGTH_LONG
+                ).show()
+                startActivity(Intent(applicationContext, MainActivity::class.java))
+            }.addOnFailureListener {
+                Toast.makeText(
+                    this,
+                    "Error cerrando el caso. por favor intentelo más tarde",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
