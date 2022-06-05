@@ -22,6 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -76,12 +77,11 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
 
         SessionManager.getInstance(applicationContext).getCurrentUser().let {
             if (it?.id == report.ownerId) {
-                binding.doneBtn.visibility = View.VISIBLE
                 val status = report.status == ReportStatus.OPEN.toString()
 
+                binding.doneBtn.visibility = if (status) View.VISIBLE else View.INVISIBLE
                 binding.doneBtn.isEnabled = status
                 binding.doneBtn.isClickable = status
-
                 binding.statusTV.text =
                     if (status) getString(R.string.report_status_open) else getString(R.string.report_status_closed)
             }
@@ -90,21 +90,31 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun closeCase(view: View?) {
-        Firebase.firestore.collection("reports").document(report.id)
-            .update("status", ReportStatus.CLOSED).addOnSuccessListener {
-                Toast.makeText(
-                    this,
-                    "Caso cerrado",
-                    Toast.LENGTH_LONG
-                ).show()
-                startActivity(Intent(applicationContext, MainActivity::class.java))
-            }.addOnFailureListener {
-                Toast.makeText(
-                    this,
-                    "Error cerrando el caso. por favor intentelo más tarde",
-                    Toast.LENGTH_LONG
-                ).show()
+
+        MaterialAlertDialogBuilder(this)
+            .setMessage("Deseas cerrar el caso")
+            .setPositiveButton("Si") { dialog, which ->
+
+                Firebase.firestore.collection("reports").document(report.id)
+                    .update("status", ReportStatus.CLOSED).addOnSuccessListener {
+                        Toast.makeText(
+                            this,
+                            "Caso cerrado",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        finish()
+                    }.addOnFailureListener {
+                        Toast.makeText(
+                            this,
+                            "Error cerrando el caso. por favor intentelo más tarde",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
             }
+            .setNegativeButton("No") { dialog, which ->
+
+            }
+            .show()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
