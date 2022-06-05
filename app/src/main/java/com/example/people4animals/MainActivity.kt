@@ -15,6 +15,8 @@ import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.caseList.Adapter
 import com.example.people4animals.databinding.ActivityMainBinding
 import com.example.people4animals.domain.user.model.Report
+import com.example.people4animals.domain.user.model.ReportStatus
+import com.example.people4animals.domain.user.model.ReportUpdate
 import com.example.people4animals.utils.LocationUtils
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -155,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val result = Firebase.firestore.collection("reports")
-                .orderBy("date")
+                .orderBy("date").whereEqualTo("status", ReportStatus.OPEN)
                 .get().await()
             val temporalList = ArrayList<Report>()
             Log.e("Results ::::: ", result!!.documents.size.toString())

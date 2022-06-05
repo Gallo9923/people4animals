@@ -76,7 +76,7 @@
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:fontFamily="@font/ubuntu_bold"
@@ -84,11 +84,19 @@
                 android:textSize="24sp" />
 
             <TextView
+                android:id="@+id/statusTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/report_status_open"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/goToCreateUpdateField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/inputs_background"
                 android:fontFamily="@font/ubuntu"
