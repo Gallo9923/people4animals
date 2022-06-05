@@ -20,6 +20,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 import kotlin.collections.ArrayList
 
 class Adapter() : RecyclerView.Adapter<PostVH>() {
@@ -39,7 +40,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     init {
         _reportList.value = ArrayList<Report>()
 
-        CoroutineScope(Dispatchers.IO).launch {
+        /* CoroutineScope(Dispatchers.IO).launch {
             Firebase.firestore.collection("reports")
                 .orderBy("date")
                 .addSnapshotListener { // Nos contextualiza en la actividad padre
@@ -51,7 +52,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
                         addPost(report)
                     }
                 }
-        }
+        }*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostVH {
@@ -63,13 +64,14 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
 
         val userActual = Firebase.firestore.collection("users")
             .document(_reportList.value!![position].ownerId).get().addOnSuccessListener {
+                //Log.e("-->", it.toString())
                 if (it != null) {
                     holder.postUsername.text = it.toObject(User::class.java)!!.name
                 }
 
             }
 
-        holder.postDescription.text = "${_reportList.value!![position].description}"
+        holder.postDescription.text = _reportList.value!![position].description
 
 
         var url = "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720__340.jpg"
@@ -131,7 +133,6 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     fun filterByUser() {
 
         postList.value!!.clear()
-
         this.notifyDataSetChanged()
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -166,21 +167,39 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
     }
 
     fun withOutFilter() {
-        notifyItemRangeRemoved(0, _reportList.value!!.size)
-        _reportList.value!!.clear()
-
         CoroutineScope(Dispatchers.IO).launch {
-            Firebase.firestore.collection("reports")
-                .orderBy("date")
-                .addSnapshotListener { // Nos contextualiza en la actividad padre
-                        result, error -> // Es necesario pasar estos dos elementos
+            _reportList.value!!.clear()
+            withContext(Dispatchers.Main) {
+                notifyItemRangeRemoved(0, _reportList.value!!.size)
+            }
 
-                    //Elementos que hacer ante el cambio, renderiza los mensajes
-                    for (doc in result!!.documents) {
-                        val report = doc.toObject(Report::class.java)!!
-                        addPost(report)
-                    }
+            val result = Firebase.firestore.collection("reports")
+                .orderBy("date")
+                .get().await()
+
+            Log.e("----------",result.toString())
+            for (doc in result!!.documents) {
+                val report = doc.toObject(Report::class.java)!!
+                withContext(Dispatchers.Main) {
+                    addPost(report)
                 }
+            }
+            Log.e("on succes", _reportList!!.value!!.size.toString())
+            if (_reportList!!.value!!.size > 1) {
+                withContext(Dispatchers.Main) {
+                    setPostList(
+                        myActivity.locationUtils.generateSortedList(
+                            _reportList!!.value!!,
+                            myActivity
+                        )
+                    )
+                }
+            }
+            Log.e("2222", _reportList!!.value!!.size.toString())
+
+
+            withContext(Dispatchers.Main) {
+            }
         }
     }
 
