@@ -6,8 +6,10 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.databinding.ActivityMapBinding
 import com.example.people4animals.databinding.ActivityReportUpdateBinding
 import com.example.people4animals.domain.user.model.Report
@@ -69,13 +71,19 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
             finish()
         }
 
-        loadUpdates()
+        SessionManager.getInstance(applicationContext).getCurrentUser().let {
+            if(it?.id == report.ownerId){
+                binding.doneBtn.isEnabled = true
+                binding.doneBtn.visibility = View.VISIBLE
+            }
+        }
+
+        binding.doneBtn.setOnClickListener(::closeCase)
+
 
     }
 
-    private fun loadUpdates() {
-
-        //Poblamos el rv  caseStatusRecyclerView
+    private fun closeCase(view: View?) {
 
     }
 
