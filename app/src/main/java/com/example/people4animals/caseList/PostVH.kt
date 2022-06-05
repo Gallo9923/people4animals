@@ -11,4 +11,5 @@ class PostVH(root: View) : RecyclerView.ViewHolder(root){
     var postUsername = binding.tvProfileName
     var postDescription = binding.tvDescription
     var postImg = binding.imageView2
+    var profileImage = binding.userProfileImageRV
 }
