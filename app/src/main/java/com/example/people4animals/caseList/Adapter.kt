@@ -74,10 +74,6 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
         holder.postDescription.text = _reportList.value!![position].description
 
 
-        var url = "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720__340.jpg"
-        Glide.with(holder.postUsername)
-            .load(url)
-            .centerCrop().into(holder.postImg)
 
         uiScope.launch {
             Firebase.storage.reference.child("report")
@@ -99,10 +95,6 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
                                     .load(profileUrl)
                                     .circleCrop().into(holder.profileImage)
                             }
-                    }else{
-                        Glide.with(holder.profileImage)
-                            .load(url).circleCrop()
-                            .into(holder.profileImage)
                     }
             }
 
