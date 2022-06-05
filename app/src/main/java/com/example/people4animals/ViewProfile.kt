@@ -109,7 +109,7 @@ class ViewProfile : Fragment() {
                     snapshot.forEach {
                         val user = it.toObject(User::class.java)
                         binding.phone.setText(user.phone)
-                        binding.nameUser.setText(user.username)
+                        binding.nameUser.setText(user.name)
                         binding.email.setText(user.username)
                         binding.spinner.setSelection(loadCity(user.city))
                     }
