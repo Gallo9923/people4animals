@@ -47,7 +47,12 @@ class NewReportUpdateActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult(),
             ::onGalleryResult
         )
-
+        binding.photoTaken.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            galleryLauncher.launch(intent)
+            true
+        }
         binding.imageButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
@@ -83,10 +88,10 @@ class NewReportUpdateActivity : AppCompatActivity() {
 
                     Toast.makeText(this, "Actualización creada", Toast.LENGTH_SHORT).show()
 
-                    Intent(this, ReportUpdateActivity::class.java).apply {
+                 /*   Intent(this, ReportUpdateActivity::class.java).apply {
                         putExtra("report", Gson().toJson(report).toString())
                         startActivity(this)
-                    }
+                    }*/
 
                     finish()
                 }

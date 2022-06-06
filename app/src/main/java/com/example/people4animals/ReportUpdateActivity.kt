@@ -70,12 +70,12 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.textView3.text = report.description
 
-        binding.goToCreateUpdateField.setOnClickListener {
+        binding.goToCreateUpdateField.editText!!.setOnClickListener {
             val intent = Intent(this, NewReportUpdateActivity::class.java).apply {
                 putExtra("report", Gson().toJson(report))
             }
             startActivity(intent)
-            finish()
+
         }
 
         SessionManager.getInstance(applicationContext).getCurrentUser().let {

@@ -19,6 +19,6 @@
     <string name="update_section_title">Actualizaciones</string>
     <string name="report_status_closed">Estado del caso: CERRADO</string>
     <string name="report_status_open">Estado del caso: ABIERTO</string>
-    <string name="update_hint">Cuentanos que sabes acerca del caso</string>
+    <string name="update_hint">Añadir actualización</string>
     <string name="update_title">Caso</string>
 </resources>
