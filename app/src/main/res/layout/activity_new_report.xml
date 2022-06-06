@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewReportActivity"
+    tools:context=".ui.NewReportActivity"
 
     >
 
@@ -16,10 +17,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/profile_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="6dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="6dp"
             android:background="@android:color/white">
 
             <RelativeLayout
@@ -61,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@id/appbarlayout_report"
-        android:src="@drawable/dogimage" />
+        app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24" />
 
     <ImageView
         android:id="@+id/addreportimageBtn"
@@ -69,9 +68,9 @@
         android:layout_height="30dp"
         android:layout_below="@id/reportImage"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
-        android:src="@drawable/addreportimage"/>
+        android:src="@drawable/addreportimage" />
 
     <TextView
         android:id="@+id/galeryTV"

@@ -1,15 +1,10 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.view.View
-import com.example.people4animals.databinding.ActivityLogInViewBinding
 import com.example.people4animals.databinding.ActivitySignUpBinding
 import com.example.people4animals.domain.user.manager.UserManager
 import com.example.people4animals.domain.user.model.User
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class SignUpActivity : AppCompatActivity() {
 

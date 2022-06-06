@@ -1,9 +1,8 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.people4animals.application.session.SessionManager

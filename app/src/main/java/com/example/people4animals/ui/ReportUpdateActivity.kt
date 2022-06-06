@@ -1,4 +1,4 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,17 +6,16 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.people4animals.R
+import com.example.people4animals.adapters.UpdatesAdapter
 import com.example.people4animals.application.session.SessionManager
-import com.example.people4animals.databinding.ActivityMapBinding
 import com.example.people4animals.databinding.ActivityReportUpdateBinding
 import com.example.people4animals.domain.user.model.Report
 import com.example.people4animals.domain.user.model.ReportStatus
-import com.example.people4animals.domain.user.model.User
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -54,7 +53,10 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.caseStatusRecyclerView.layoutManager = LinearLayoutManager(this)
 
+
         manager = getSystemService(LOCATION_SERVICE) as LocationManager
+
+        binding.doneBtn.setOnClickListener(::closeCase)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -68,31 +70,33 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.textView3.text = report.description
 
-        binding.goToCreateUpdateField.setOnClickListener {
+        binding.goToCreateUpdateField.editText!!.setOnClickListener {
             val intent = Intent(this, NewReportUpdateActivity::class.java).apply {
                 putExtra("report", Gson().toJson(report))
             }
             startActivity(intent)
-            finish()
+
         }
 
         SessionManager.getInstance(applicationContext).getCurrentUser().let {
             if (it?.id == report.ownerId) {
                 val status = report.status == ReportStatus.OPEN.toString()
+                Log.e("status", status.toString() )
+                binding.doneBtn.visibility = if (status) View.VISIBLE else View.GONE
 
-                binding.doneBtn.visibility = if (status) View.VISIBLE else View.INVISIBLE
-                binding.doneBtn.isEnabled = status
-                binding.doneBtn.isClickable = status
                 binding.statusTV.text =
                     if (status) getString(R.string.report_status_open) else getString(R.string.report_status_closed)
             }
         }
 
-        binding.doneBtn.setOnClickListener(::closeCase)
+
+
+
     }
 
     private fun closeCase(view: View?) {
 
+        Log.e("cerrar", "closeCase: ", )
         MaterialAlertDialogBuilder(this).setTitle("Confirmación")
             .setMessage("¿Deseas cerrar el caso?")
             .setPositiveButton("Si") { dialog, which ->
@@ -164,9 +168,9 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
         if (photoID == "") return
 
         Firebase.storage.getReference().child("report")
-            .child(photoID!!).downloadUrl.addOnSuccessListener {
+            .child(photoID!!).downloadUrl.addOnCompleteListener {
                 //Log.e(">>>",it.toString())
-                Glide.with(binding.imageView4).load(it).into(binding.imageView4)
+                Glide.with(binding.imageView4).load(it.result).into(binding.imageView4)
             }
     }
 }

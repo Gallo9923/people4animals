@@ -1,4 +1,4 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +20,6 @@ import com.bumptech.glide.Glide
 import com.google.firebase.storage.ktx.storage
 import java.util.*
 import android.app.Activity.RESULT_OK
-import android.util.Log
 import android.widget.Toast
 
 class ViewProfile : Fragment() {

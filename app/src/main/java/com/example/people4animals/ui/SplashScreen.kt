@@ -1,15 +1,13 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
-import android.widget.Toast
+import com.example.people4animals.R
 import com.example.people4animals.application.session.SessionManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
 
 class SplashScreen : AppCompatActivity() {
 

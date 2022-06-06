@@ -1,22 +1,17 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.people4animals.caseList.Adapter
 import com.example.people4animals.databinding.FragmentGeneralBinding
 import com.google.android.material.tabs.TabLayout
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class GeneralFragment : Fragment() {
 
@@ -30,6 +25,7 @@ class GeneralFragment : Fragment() {
         binding = FragmentGeneralBinding.inflate(layoutInflater, container, false)
         binding.rvPost.adapter = adapter
         binding.rvPost.layoutManager = LinearLayoutManager(context)
+        binding.rvPost.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
 
         binding.swipeRvPost.setOnRefreshListener {
 
