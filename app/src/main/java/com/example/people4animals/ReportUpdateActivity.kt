@@ -58,6 +58,8 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
 
         manager = getSystemService(LOCATION_SERVICE) as LocationManager
 
+        binding.doneBtn.setOnClickListener(::closeCase)
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapView2) as SupportMapFragment
@@ -81,20 +83,22 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
         SessionManager.getInstance(applicationContext).getCurrentUser().let {
             if (it?.id == report.ownerId) {
                 val status = report.status == ReportStatus.OPEN.toString()
+                Log.e("status", status.toString() )
+                binding.doneBtn.visibility = if (status) View.VISIBLE else View.GONE
 
-                binding.doneBtn.visibility = if (status) View.VISIBLE else View.INVISIBLE
-                binding.doneBtn.isEnabled = status
-                binding.doneBtn.isClickable = status
                 binding.statusTV.text =
                     if (status) getString(R.string.report_status_open) else getString(R.string.report_status_closed)
             }
         }
 
-        binding.doneBtn.setOnClickListener(::closeCase)
+
+
+
     }
 
     private fun closeCase(view: View?) {
 
+        Log.e("cerrar", "closeCase: ", )
         MaterialAlertDialogBuilder(this).setTitle("Confirmación")
             .setMessage("¿Deseas cerrar el caso?")
             .setPositiveButton("Si") { dialog, which ->
