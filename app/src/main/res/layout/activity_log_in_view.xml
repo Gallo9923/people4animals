@@ -44,9 +44,7 @@
             android:id="@+id/resetPasswordLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:inputType="textUri"
             android:text="Olvidé mi contraseña"
             android:textColor="@color/app_blue"
             android:textStyle="bold"
@@ -107,6 +105,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             app:layout_constraintEnd_toEndOf="@+id/loginEmailETChild"
             android:layout_marginTop="16dp"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
             app:endIconMode="password_toggle"
             app:layout_constraintStart_toStartOf="@+id/loginEmailETChild"
             app:layout_constraintTop_toBottomOf="@+id/loginEmailETChild">
