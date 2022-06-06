@@ -1,6 +1,7 @@
 package com.example.people4animals.caseList
 
 import android.app.Activity
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -88,13 +89,20 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
 
                 val user = it.toObject(User::class.java)
 
+                    Log.e("user", "${user!!.name},${user.photoID} ", )
                     if(user!!.photoID!=""){
                         Firebase.storage.reference.child("profile")
                             .child(user.photoID).downloadUrl.addOnSuccessListener { profileUrl ->
                                 Glide.with(holder.profileImage)
                                     .load(profileUrl)
+                                    .placeholder(R.drawable.dog)
                                     .circleCrop().into(holder.profileImage)
                             }
+                    }
+                    else{
+
+                        Glide.with(holder.postImg).clear(holder.profileImage);
+                        // remove the placeholder (optional); read comments below
                     }
             }
 
@@ -158,7 +166,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
         }*/
     }
 
-    fun withOutFilter() {
+ /*   fun withOutFilter() {
         CoroutineScope(Dispatchers.IO).launch {
             _reportList.value!!.clear()
             withContext(Dispatchers.Main) {
@@ -193,7 +201,7 @@ class Adapter() : RecyclerView.Adapter<PostVH>() {
             withContext(Dispatchers.Main) {
             }
         }
-    }
+    }*/
 
     interface OnReportItemClickListenerInterface{
         fun onReportItemClick(pos: Int)

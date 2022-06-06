@@ -22,6 +22,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
@@ -75,6 +76,13 @@ class MainActivity : AppCompatActivity() {
         // instance of location services
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+    //hace que funcione en xiaomi
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+
+                userLocation = LatLng(location!!.latitude,location.longitude)
+                getReportsList(generalFragment.adapter)
+            }
         binding.bottomNavView.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
@@ -112,6 +120,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun OnLocationGPSCheange(loc: Location) {
+
+        Log.e("gpss", "OnLocationGPSCheange: ", )
         userLocation = LatLng(loc.latitude, loc.longitude)
         getReportsList(generalFragment.adapter)
         Log.e("ubicación", userLocation.toString())
@@ -151,13 +161,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getReportsList(adapter: Adapter) {
+
+        Log.e("entrooo", "getReportsList: ", )
         adapter.postList.value!!.clear()
         adapter.notifyItemRangeRemoved(0, adapter.postList.value!!.size)
         adapter.notifyDataSetChanged()
 
         CoroutineScope(Dispatchers.IO).launch {
             val result = Firebase.firestore.collection("reports")
-                .orderBy("date").whereEqualTo("status", ReportStatus.OPEN)
+                .orderBy("date",Query.Direction.DESCENDING).whereEqualTo("status", ReportStatus.OPEN)
                 .get().await()
             val temporalList = ArrayList<Report>()
             Log.e("Results ::::: ", result!!.documents.size.toString())
