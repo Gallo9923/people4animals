@@ -19,13 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.People4Animals">
         <activity
-            android:name=".NewReportUpdateActivity"
+            android:name=".ui.NewReportUpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".ReportUpdateActivity"
+            android:name=".ui.ReportUpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".MapActivity"
+            android:name=".ui.MapActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -43,10 +43,10 @@
             android:value="${MAPS_API_KEY}"/>
 
         <activity
-            android:name=".NewReportActivity"
+            android:name=".ui.NewReportActivity"
             android:exported="true" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".ui.SplashScreen"
             android:exported="true"
             android:theme="@style/SplashPeople4Animals">
             <intent-filter>
@@ -56,13 +56,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".ui.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".LogInView"
+            android:name=".ui.LogInView"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing" />
     </application>

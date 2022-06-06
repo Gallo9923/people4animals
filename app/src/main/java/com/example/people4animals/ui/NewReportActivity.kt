@@ -1,4 +1,4 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -6,10 +6,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import com.example.people4animals.R
 import com.example.people4animals.databinding.ActivityNewReportBinding
 import com.example.people4animals.domain.user.model.Report
 import com.example.people4animals.domain.user.model.ReportStatus
@@ -114,9 +114,9 @@ class NewReportActivity : AppCompatActivity() {
             val userReportRef = Firebase.firestore.collection("users").document(userId).collection("reports").document(report.id)
             batch.set(userReportRef, userReport)
         }.addOnSuccessListener {
-            Toast.makeText(this,  R.string.success_report_creation, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.success_report_creation, Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
-            Toast.makeText(this,  R.string.report_error_message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.report_error_message, Toast.LENGTH_SHORT).show()
         }
 
         finish()

@@ -1,4 +1,4 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,18 +6,16 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.people4animals.R
+import com.example.people4animals.adapters.UpdatesAdapter
 import com.example.people4animals.application.session.SessionManager
-import com.example.people4animals.databinding.ActivityMapBinding
 import com.example.people4animals.databinding.ActivityReportUpdateBinding
 import com.example.people4animals.domain.user.model.Report
 import com.example.people4animals.domain.user.model.ReportStatus
-import com.example.people4animals.domain.user.model.User
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

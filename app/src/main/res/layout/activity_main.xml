@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.people4animals.HomeFragment"
+        android:name="com.example.people4animals.ui.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="false"

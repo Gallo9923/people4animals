@@ -1,4 +1,4 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -6,14 +6,13 @@ import android.content.Intent
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.people4animals.R
 import com.example.people4animals.databinding.ActivityMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 

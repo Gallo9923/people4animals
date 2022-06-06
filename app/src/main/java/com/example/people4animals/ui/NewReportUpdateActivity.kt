@@ -1,10 +1,9 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -18,7 +17,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
-import kotlinx.coroutines.tasks.await
 import java.util.*
 
 

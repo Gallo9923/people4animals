@@ -1,19 +1,14 @@
 package com.example.people4animals.caseList
 
-import android.app.Activity
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.people4animals.MainActivity
+import com.example.people4animals.ui.MainActivity
 import com.example.people4animals.R
-import com.example.people4animals.application.session.SessionManager
-import com.example.people4animals.domain.user.manager.UserManager
 import com.example.people4animals.domain.user.model.Report
 import com.example.people4animals.domain.user.model.User
 import com.google.firebase.auth.ktx.auth
@@ -21,7 +16,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
 import kotlin.collections.ArrayList
 
 class Adapter() : RecyclerView.Adapter<PostVH>() {

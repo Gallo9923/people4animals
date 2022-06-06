@@ -1,4 +1,4 @@
-package com.example.people4animals
+package com.example.people4animals.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,12 +11,12 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.people4animals.R
 import com.example.people4animals.application.session.SessionManager
 import com.example.people4animals.caseList.Adapter
 import com.example.people4animals.databinding.ActivityMainBinding
 import com.example.people4animals.domain.user.model.Report
 import com.example.people4animals.domain.user.model.ReportStatus
-import com.example.people4animals.domain.user.model.ReportUpdate
 import com.example.people4animals.utils.LocationUtils
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -30,8 +30,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.util.*
-import kotlin.Comparator
 import kotlin.collections.ArrayList
 import kotlin.math.abs
 import kotlin.math.pow

@@ -2,11 +2,10 @@ package com.example.people4animals.utils
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.location.Location
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.people4animals.MainActivity
+import com.example.people4animals.ui.MainActivity
 import com.example.people4animals.domain.user.model.Report
 import kotlin.math.abs
 import kotlin.math.pow

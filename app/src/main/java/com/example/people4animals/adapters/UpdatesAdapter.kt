@@ -1,13 +1,12 @@
-package com.example.people4animals
+package com.example.people4animals.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.people4animals.caseList.PostVH
+import com.example.people4animals.ui.MainActivity
+import com.example.people4animals.R
 import com.example.people4animals.caseList.updatesList.UpdateVH
 import com.example.people4animals.domain.user.model.ReportUpdate
 import com.example.people4animals.domain.user.model.User
