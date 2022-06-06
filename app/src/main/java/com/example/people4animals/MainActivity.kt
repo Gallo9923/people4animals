@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.e("gpss", "OnLocationGPSCheange: ", )
         userLocation = LatLng(loc.latitude, loc.longitude)
-        getReportsList(generalFragment.adapter)
+
         Log.e("ubicación", userLocation.toString())
     }
 

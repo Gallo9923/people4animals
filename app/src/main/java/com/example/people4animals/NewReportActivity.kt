@@ -52,6 +52,12 @@ class NewReportActivity : AppCompatActivity() {
             galleryLauncher.launch(intent)
         }
 
+        binding.reportImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            galleryLauncher.launch(intent)
+        }
+
         val mapIntent = Intent(this, MapActivity::class.java).apply {
         }
 
