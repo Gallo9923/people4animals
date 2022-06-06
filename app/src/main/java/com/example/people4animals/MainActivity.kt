@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
     //hace que funcione en xiaomi
-        fusedLocationClient.lastLocation
+       fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
 
                 userLocation = LatLng(location!!.latitude,location.longitude)
@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.e("gpss", "OnLocationGPSCheange: ", )
         userLocation = LatLng(loc.latitude, loc.longitude)
-
+        //getReportsList(generalFragment.adapter)
         Log.e("ubicación", userLocation.toString())
     }
 
