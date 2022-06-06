@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
+import kotlinx.coroutines.tasks.await
 import java.util.*
 
 
@@ -30,7 +32,7 @@ class NewReportUpdateActivity : AppCompatActivity() {
 
     private val uid = Firebase.auth.currentUser?.uid
 
-    private lateinit var uri: Uri
+    private var uri: Uri? = null
 
     private val updateID = UUID.randomUUID().toString()
 
@@ -62,8 +64,9 @@ class NewReportUpdateActivity : AppCompatActivity() {
         }
     }
 
-    private fun sendReport(view: View?) {
-        uri.let {
+    private  fun sendReport(view: View?) {
+
+        uri?.let {
             val reportUpdate = ReportUpdate(
                 uid!!,
                 binding.reportDescription.text.toString(),
@@ -71,19 +74,24 @@ class NewReportUpdateActivity : AppCompatActivity() {
                 updateID,
                 updateID
             )
-
             Firebase.storage.reference.child("reportUpdate").child(updateID).putFile(uri!!)
-            Firebase.firestore.collection("reports").document(report.id).collection("updates")
-                .document(updateID).set(reportUpdate)
+                .addOnCompleteListener {
 
-            Toast.makeText(this, "Actualización creada", Toast.LENGTH_SHORT).show()
+                    Firebase.firestore.collection("reports").document(report.id)
+                        .collection("updates")
+                        .document(updateID).set(reportUpdate)
 
-            Intent(this, ReportUpdateActivity::class.java).apply {
-                putExtra("report", Gson().toJson(report).toString())
-                startActivity(this)
-            }
+                    Toast.makeText(this, "Actualización creada", Toast.LENGTH_SHORT).show()
 
-            finish()
+                    Intent(this, ReportUpdateActivity::class.java).apply {
+                        putExtra("report", Gson().toJson(report).toString())
+                        startActivity(this)
+                    }
+
+                    finish()
+                }
+
+            return
         }
         Toast.makeText(this, "Seleccione una imagen", Toast.LENGTH_SHORT).show()
     }
