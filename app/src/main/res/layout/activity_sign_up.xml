@@ -46,6 +46,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:endIconMode="clear_text"
+
                 android:layout_marginTop="32dp"
                 android:hint="Nombre">
 
@@ -61,6 +63,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:endIconMode="clear_text"
+
                 android:hint="Apellido"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +81,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:endIconMode="clear_text"
+
                 android:hint="Telefono"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +100,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:endIconMode="clear_text"
+
                 android:layout_marginTop="16dp"
                 android:hint="Correo electronico"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,6 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:endIconMode="clear_text"
                 android:hint="Rango de acción"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -16,10 +16,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/profile_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="6dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="6dp"
             android:background="@android:color/white">
 
             <RelativeLayout
@@ -69,9 +67,9 @@
         android:layout_height="30dp"
         android:layout_below="@id/reportImage"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
-        android:src="@drawable/addreportimage"/>
+        android:src="@drawable/addreportimage" />
 
     <TextView
         android:id="@+id/galeryTV"

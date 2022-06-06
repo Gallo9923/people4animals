@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.people4animals.caseList.Adapter
 import com.example.people4animals.databinding.FragmentGeneralBinding
@@ -30,6 +31,7 @@ class GeneralFragment : Fragment() {
         binding = FragmentGeneralBinding.inflate(layoutInflater, container, false)
         binding.rvPost.adapter = adapter
         binding.rvPost.layoutManager = LinearLayoutManager(context)
+        binding.rvPost.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
 
         binding.swipeRvPost.setOnRefreshListener {
 

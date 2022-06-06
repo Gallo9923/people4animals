@@ -107,6 +107,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             app:layout_constraintEnd_toEndOf="@+id/loginEmailETChild"
             android:layout_marginTop="16dp"
+            app:endIconMode="password_toggle"
             app:layout_constraintStart_toStartOf="@+id/loginEmailETChild"
             app:layout_constraintTop_toBottomOf="@+id/loginEmailETChild">
 
@@ -127,6 +128,8 @@
             android:id="@+id/loginEmailETChild"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
+            app:startIconDrawable="@drawable/ic_baseline_email_24"
+            app:endIconMode="clear_text"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="Correo"

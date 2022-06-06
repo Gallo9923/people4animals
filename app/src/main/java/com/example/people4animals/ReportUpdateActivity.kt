@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.people4animals.application.session.SessionManager
@@ -53,6 +54,7 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.caseStatusRecyclerView.adapter = updatesAdapter
 
         binding.caseStatusRecyclerView.layoutManager = LinearLayoutManager(this)
+
 
         manager = getSystemService(LOCATION_SERVICE) as LocationManager
 
@@ -164,9 +166,9 @@ class ReportUpdateActivity : AppCompatActivity(), OnMapReadyCallback {
         if (photoID == "") return
 
         Firebase.storage.getReference().child("report")
-            .child(photoID!!).downloadUrl.addOnSuccessListener {
+            .child(photoID!!).downloadUrl.addOnCompleteListener {
                 //Log.e(">>>",it.toString())
-                Glide.with(binding.imageView4).load(it).into(binding.imageView4)
+                Glide.with(binding.imageView4).load(it.result).into(binding.imageView4)
             }
     }
 }
